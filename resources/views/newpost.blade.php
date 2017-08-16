@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">New Post</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('home_post') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('new_post_submit') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">

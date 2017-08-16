@@ -22,7 +22,7 @@ class PostController extends Controller
         ]);
     }
 
-    function index_post($id, Request $request)
+    function index_post($id, Request $request) //add new commentary
     {
         $user_id = Auth::user()->id;
         $post_id = $id;

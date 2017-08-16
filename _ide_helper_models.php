@@ -12,6 +12,8 @@ namespace App{
 /**
  * App\Comment
  *
+ * @property-read \App\User $author
+ * @mixin \Eloquent
  */
 	class Comment extends \Eloquent {}
 }
@@ -20,9 +22,20 @@ namespace App{
 /**
  * App\Post
  *
+ * @property-read \App\User $author
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Comment[] $comments
+ * @mixin \Eloquent
  */
 	class Post extends \Eloquent {}
+}
+
+namespace App{
+/**
+ * App\Subscription
+ *
+ * @mixin \Eloquent
+ */
+	class Subscription extends \Eloquent {}
 }
 
 namespace App{
@@ -30,6 +43,7 @@ namespace App{
  * App\User
  *
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @mixin \Eloquent
  */
 	class User extends \Eloquent {}
 }

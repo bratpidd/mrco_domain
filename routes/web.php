@@ -18,9 +18,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::post('/', 'HomeController@index_post')->name('home_post');
+Route::post('/new_post_submit', 'HomeController@index_post')->name('new_post_submit');
+Route::post('/new_sub_submit', 'HomeController@subscribe')->name('new_sub_submit');
 
 Route::get('/newpost', 'NewPostController@index')->name('newpost');
 
 Route::get('/post/{id}', 'PostController@index');
 Route::post('/post/{id}', 'PostController@index_post');
+
+Route::get('/sub', 'SubController@index')->name('sub');

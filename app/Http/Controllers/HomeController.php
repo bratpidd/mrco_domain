@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Subscription;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -31,7 +32,7 @@ class HomeController extends Controller
             ]);
     }
 
-    public function index_post(Request $request)
+    public function index_post(Request $request) //add new post
     {
         if (Auth::check())
         {
@@ -52,5 +53,29 @@ class HomeController extends Controller
         {
             return view('blank');
         }
+    }
+
+    public function subscribe(Request $request) //add subscription
+    {
+        $author_id = $request->get('author_id');
+        $user_id = Auth::user()->id;
+
+        if (
+            Subscription::
+            where('user_id', '=', $user_id)->
+            where('author_id', '=', $author_id)
+            ->count() == 0
+        )
+        {
+            $sub = new Subscription();
+            $sub->user_id = $user_id;
+            $sub->author_id = $author_id;
+            $sub->save();
+            return redirect($_SERVER['HTTP_REFERER']);
+        }
+        else
+            {
+                return redirect(route('home'));
+            }
     }
 }
