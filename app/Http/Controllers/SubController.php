@@ -13,7 +13,7 @@ class SubController extends Controller
     public function index()
     {
         //$subs = User::with('subs')->where('id', '=', '1')->get();
-        $user_id = Auth::user()->id;
+        //$user_id = Auth::user()->id;
 
         $subs = DB::table('users')
             ->join('subscriptions', function($join)

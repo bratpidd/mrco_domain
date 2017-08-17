@@ -1,10 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="">
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <h1>ti mydila podpisan na @foreach($subs as $sub) {{ $sub[1] }}, @endforeach</h1>
+            <div class="col-md-1 col-md-offset-3">
+                <h3>Subscriptions:</h3>
+                <ul class="list-group">
+                    @foreach ($subs as $sub)
+                        <li class="list-group-item">{{ $sub[1] }}</li>
+                    @endforeach
+                </ul>
+            </div>
+
+            <div class="col-md-4 col-md-offset-0">
                 @foreach ($posts as $post)
                     <div class="panel panel-default">
 
@@ -38,7 +46,6 @@
                             </ul>
 
                         </nav>
-
 
                         <div class="panel-heading">
                             <strong><h2>{{ $post->title }}</h2></strong>
