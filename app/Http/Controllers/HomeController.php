@@ -60,12 +60,15 @@ class HomeController extends Controller
         $author_id = $request->get('author_id');
         $user_id = Auth::user()->id;
 
-        if (
-            Subscription::
-            where('user_id', '=', $user_id)->
-            where('author_id', '=', $author_id)
-            ->count() == 0
-        )
+        $exist = Subscription:://select('id')
+            where('user_id', '=', $user_id)
+            ->where('author_id', '=', $author_id)
+            ->get();
+
+        //echo $user_id.' '.$author_id.' '.$exist->count();
+
+        //dd($exist);
+        if ($exist->count() == 0)
         {
             $sub = new Subscription();
             $sub->user_id = $user_id;

@@ -14,13 +14,13 @@
                                     <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ route('new_sub_submit') }}"
+                                        <a href="{{ $post->author->id }}"
                                            onclick="event.preventDefault();
-                                                     document.getElementById('subscribe-form').submit();">
+                                                     document.getElementById('subscribe-form{{ $post->id }}').submit();">
                                             Subscribe
                                         </a>
 
-                                        <form id="subscribe-form" action="{{ route('new_sub_submit') }}" method="POST" style="display: none;">
+                                        <form id="subscribe-form{{ $post->id }}" action="{{ route('new_sub_submit') }}" method="POST" style="display: none;">
                                             <input type="hidden" id="author_id" name="author_id" value="{{ $post->author->id }}">
                                             {{ csrf_field() }}
                                         </form>

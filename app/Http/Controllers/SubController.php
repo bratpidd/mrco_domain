@@ -24,6 +24,8 @@ class SubController extends Controller
             )->select(['users.id', 'username'] )
             ->get();
 
+        $subs2 = [];
+        $subs_view = [];
         foreach ($subs as $value) {
             $subs2[] = $value->id;
             $subs_view[] = [$value->id, $value->username];
