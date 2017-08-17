@@ -4,13 +4,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
+                <h1>ti mydila podpisan na @foreach($subs as $sub) {{ $sub[1] }}, @endforeach</h1>
                 @foreach ($posts as $post)
                     <div class="panel panel-default">
 
                         <nav class="navbar navbar-inverse">
                             <ul class="nav navbar-nav">
                                 <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"> {{ $post->author->username }}
                                         <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li>
@@ -21,7 +22,7 @@
                                             </a>
 
                                             <form id="subscribe-form" action="{{ route('new_sub_submit') }}" method="POST" style="display: none;">
-                                                <input type="hidden" id="author_id" name="author_id" value="kok">
+                                                <input type="hidden" id="author_id" name="author_id" value="{{ $post->author->username }}">
                                                 {{ csrf_field() }}
                                             </form>
                                         </li>
@@ -43,7 +44,7 @@
                             <strong><h2>{{ $post->title }}</h2></strong>
                         </div>
                         <div class="panel-body">{{ $post->content }}</div>
-                        <div class="panel-footer"><a href = '/post/{{ $post->id }}'>kok comments</a></div>
+                        <div class="panel-footer"><a href = '/post/{{ $post->id }}'>{{ $post->comments_count }} comments</a></div>
                     </div>
                 @endforeach
             </div>
