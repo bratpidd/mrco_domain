@@ -20,11 +20,22 @@ class SubController extends Controller
                 $user_id = Auth::user()->id;
                 $join->on('users.id', '=', 'subscriptions.author_id')->where('subscriptions.user_id', '=', $user_id);
             }
-            )
+            )->select('users.username')
             ->get();
 
+        $posts = DB::table('posts')
+            ->join('subscriptions', function($join)
+            {
+                $user_id = Auth::user()->id;
+                $join->on('posts.user_id', '=', 'subscriptions.author_id')->where('subscriptions.user_id', '=', $user_id);
+            }
+            )->join('users', 'posts.user_id', '=', 'users.id')
+            ->get();
 
-        dd($subs);
-        return '1';
+        dd($posts);
+        return view('subs', [
+            'posts' => $posts,
+            'authors' => $subs
+        ]);
     }
 }
