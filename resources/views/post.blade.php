@@ -5,9 +5,27 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Author: {{ $post->author->username }}
-                        <div class="pull-right"> {{ $post->created_at }}</div>
-                    </div>
+                    <div class="navbar navbar-inverse">
+                        <div class="row" style="margin: 12px; color: #BBBBBB ">
+                        <div class="col-md-4 text-left">Author: {{ $post->author->username }}</div>
+                        <div class="col-md-4 text-center">
+                            @if($subscribed) Subscribed
+                            @else
+                                <a style="color: #CCCCCC"
+                                   href="{{ $post->author->id }}"
+                                   onclick="event.preventDefault();
+                                           document.getElementById('subscribe-form{{ $post->id }}').submit();">
+                                    Subscribe
+                                </a>
+
+                                <form id="subscribe-form{{ $post->id }}" action="{{ route('new_sub_submit') }}" method="POST" style="display: none;">
+                                    <input type="hidden" id="author_id" name="author_id" value="{{ $post->author->id }}">
+                                {{ csrf_field() }}
+                                </form>
+                            @endif
+                        </div>
+                        <div class="col-md-4 text-right">{{ $post->created_at }}</div>
+                        </div></div>
                     <div class="panel-heading">
                         <strong><h2>{{ $post->title }}</h2></strong>
                     </div>

@@ -3,11 +3,24 @@
 @section('content')
     <div class="">
         <div class="row">
-            <div class="col-md-1 col-md-offset-3">
+            <div class="col-lg-2 col-lg-offset-2 col-md-3 col-md-offset-1">
                 <h3>Subscriptions:</h3>
                 <ul class="list-group">
                     @foreach ($subs as $sub)
-                        <li class="list-group-item">{{ $sub[1] }}</li>
+                        <li class="list-group-item">
+                            {{ $sub[1] }}
+                            <a class="pull-right" href="{{ route('cancel_sub') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('subscribe-form{{ $sub[0] }}').submit();">
+                                cancel
+                            </a>
+
+                            <form id="subscribe-form{{ $sub[0] }}" action="{{ route('cancel_sub') }}" method="POST" style="display: none;">
+                                <input type="hidden" id="author_id" name="author_id" value="{{ $sub[0] }}">
+                                {{ csrf_field() }}
+                            </form>
+
+                        </li>
                     @endforeach
                 </ul>
             </div>
@@ -22,18 +35,7 @@
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"> {{ $post->author->username }}
                                         <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="{{ route('new_sub_submit') }}"
-                                               onclick="event.preventDefault();
-                                                     document.getElementById('subscribe-form').submit();">
-                                                Subscribe
-                                            </a>
 
-                                            <form id="subscribe-form" action="{{ route('new_sub_submit') }}" method="POST" style="display: none;">
-                                                <input type="hidden" id="author_id" name="author_id" value="{{ $post->author->username }}">
-                                                {{ csrf_field() }}
-                                            </form>
-                                        </li>
                                         <li><a href="#">User Activity</a></li>
                                     </ul>
                                 </li>

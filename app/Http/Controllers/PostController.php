@@ -3,22 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Subscription;
 use Illuminate\Http\Request;
 use App\Post;
 use Auth;
+use App\User;
 
 class PostController extends Controller
 {
     function index($id)
     {
-        $post = Post::withCount('comments')->where('id', $id)->first();
-        $comments = Comment::with('author')->where('post_id', $id)->orderBy('updated_at', 'desc')->get();
+        $post = Post::with('author')->withCount('comments')->where('id', '=', $id)->get();
+        //dd($post[0]);
+        $comments = Comment::with('author')->where('post_id', '=', $id)->orderBy('updated_at', 'desc')->get();
      //   $commentNum = Post::find($id)->comments()->count();
      //   $commentNum = Post::withCount('comments')->get();
         //dd ($post);
+        $author_id = $post[0]->author->id;
+        $subscribed =  Auth::user()->ifSubscribed($author_id);
+
         return view('post',[
-            'post' => $post,
+            'post' => $post[0],
             'comments' => $comments,
+            'subscribed' => $subscribed
         ]);
     }
 

@@ -33,8 +33,16 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function subs()
+    public function subscribed()
     {
-        return $this->hasManyThrough('App\Post', 'App\Subscription','user_id','user_id', 'id');
+        //return $this->hasManyThrough('App\Post', 'App\Subscription','user_id','user_id', 'id');
+    }
+
+    public function ifSubscribed($author_id)
+    {
+        $user_id = $this->id;
+        $subscribed = Subscription::where('user_id', '=', $user_id)
+            ->where('author_id', '=', $author_id)->count();
+        return $subscribed;
     }
 }

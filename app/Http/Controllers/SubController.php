@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Subscription;
 use Illuminate\Http\Request;
 use App\User;
 use DB;
@@ -56,5 +57,16 @@ class SubController extends Controller
             'posts' => $posts,
             'subs' => $subs_view
         ]);
+    }
+
+    public function cancel_sub(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $author_id = $request->get('author_id');
+        //echo $user_id.' '.$author_id;
+
+        Subscription::where('user_id', '=', $user_id)
+            ->where('author_id', '=', $author_id)->delete();
+        return redirect('/sub');
     }
 }
