@@ -43,7 +43,27 @@
                         <strong><h2>{{ $post->title }}</h2></strong>
                     </div>
                     <div class="panel-body">{{ $post->content }}</div>
-                    <div class="panel-footer"><a href = '/post/{{ $post->id }}'>{{ $post->comments_count }} comments</a></div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href = '/post/{{ $post->id }}'>{{ $post->comments_count }} comments</a>
+                            </div>
+                            <div class="col-md-6">
+                                <a id="like_a" class="pull-right"
+                                   onclick="
+                                           event.preventDefault();
+                                           document.getElementById('form_like').submit();
+                                           ">
+                                    ♥
+                                </a>
+                                <a id="like_count" class="pull-right">0</a>
+                                <form id="form_like" name="form_like" action="{{ route('new_like') }}" method="POST">
+                                    <input type="hidden" id="post_id" name="post_id" value="{{ $post->id }}">
+                                    <input type="submit" name="submit" id="submit" value="submit">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             @endforeach
         </div>

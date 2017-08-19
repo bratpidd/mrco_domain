@@ -79,5 +79,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/ajax_like.js') }}"></script>
 </body>
 </html>
