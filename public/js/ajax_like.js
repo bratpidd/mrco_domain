@@ -24,6 +24,7 @@ jQuery( document ).ready( function($) {
         //do anything else you might want to do
         //.....
         document.getElementById('submit').value = 'd';
+        //skiborg dolboeb
         //prevent the form from actually submitting in browser
         e.preventDefault();
         return false;
