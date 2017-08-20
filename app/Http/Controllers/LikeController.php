@@ -9,12 +9,13 @@ class LikeController extends Controller
     public function index(Request $request)
     {
         $post_id = $request->get('post_id');
-        //echo ($post_id);
-        $post2 = $post_id+2;
+        //$exist
+
+
         $response = array(
             'status' => 'suckcess',
             'msg' => 'Setting created successfully',
-            'post' => $post2
+            'post' => 'ya tvou mamu ebal'
         );
         //echo 'cock dick';
         return \Response::json( $response );

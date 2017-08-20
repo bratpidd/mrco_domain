@@ -11,7 +11,7 @@ $( document ).ready( function($) {
         var post_id = $(this).data('post_id');
         //var yid = t.attr('data-id');
         //token = $('meta[name="csrf-token"]').attr('content');
-        alert (post_id);
+        //alert (post_id);
         $.post(
             '/new_like',
             {
@@ -20,7 +20,7 @@ $( document ).ready( function($) {
             },
             function( data ) {
                 //$('.submit').html(data);
-                 alert( "Data Loaded: " + data.post );
+                 //alert( "Data Loaded: " + data.post );
                 //do something with data/response returned by server
                 $('#like_count'+post_id).text(data.post);
             },
