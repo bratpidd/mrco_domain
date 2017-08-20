@@ -26,17 +26,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-            $posts = Post::
-            with('author')
-                ->withCount('comments')
-                ->withCount('likes')
-                ->withCount('my_like')
-                ->orderBy('created_at', 'desc')
-                ->get();
-            //dd($posts);
-            return view('home',[
-                'posts' => $posts
-            ]);
+        $posts = Post::
+        with('author')
+            ->withCount('comments')
+            ->withCount('likes')
+            ->withCount('my_like')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        //dd($posts);
+        return view('home',[
+            'posts' => $posts
+        ]);
     }
 
     public function index_post(Request $request) //add new post

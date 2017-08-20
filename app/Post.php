@@ -31,7 +31,13 @@ class Post extends Model
 
     public function my_like()
     {
-        $user_id = Auth::user()->id;
+        if (Auth::check())
+        {
+            $user_id = Auth::user()->id;
+        } else
+        {
+            $user_id = -1;
+        }
         return $this->hasOne('App\Like', 'post_id', 'id')
             ->where('user_id', '=', $user_id);
     }
