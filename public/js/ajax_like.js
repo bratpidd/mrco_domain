@@ -20,9 +20,20 @@ $( document ).ready( function($) {
             },
             function( data ) {
                 //$('.submit').html(data);
-                 //alert( "Data Loaded: " + data.post );
+                 //alert( "Data Loaded: " + data.result );
                 //do something with data/response returned by server
-                $('#like_count'+post_id).text(data.post);
+                var label = $('#label'+post_id);
+                label.text("("+data.likes_count+")");
+                var heart = $('#heart'+post_id);
+                if (data.result == 'added')
+                {
+                    heart.removeClass("text-muted");
+                    heart.addClass("text-primary");
+                } else
+                    {
+                        heart.removeClass("text-primary");
+                        heart.addClass("text-muted");
+                    }
             },
             'json'
         );

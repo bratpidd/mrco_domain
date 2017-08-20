@@ -49,12 +49,22 @@
                                 <a href = '/post/{{ $post->id }}'>{{ $post->comments_count }} comments</a>
                             </div>
                             <div class="col-md-6">
+
                                 <a class="like_link" href="♥" id="a_like" data-post_id="{{ $post->id }}">
-                                    <span class="pull-right">
+                                    @if ($post->my_like_count)
+                                    <span id="heart{{ $post->id }}" class="text-primary pull-right" style="font-size: 22px;">
+                                        @else
+                                            <span id="heart{{ $post->id }}" class="text-muted pull-right" style="font-size: 22px;">
+                                        @endif
                                         ♥
                                     </span>
                                 </a>
-                                <a id="like_count{{ $post->id }}" class="pull-right">0</a>
+
+                                <a id="like_count{{ $post->id }}" class="pull-right">
+                                    <span id="label{{ $post->id }}" class="text-muted pull-right" style="font-size: 22px;">
+                                        ({{ $post->likes_count }})
+                                    </span>
+                                </a>
                             </div>
                         </div>
                     </div>
