@@ -49,23 +49,18 @@
                                 <a href = '/post/{{ $post->id }}'>{{ $post->comments_count }} comments</a>
                             </div>
                             <div class="col-md-6">
-                                <a id="like_a" class="pull-right"
-                                   onclick="
-                                           event.preventDefault();
-                                           document.getElementById('form_like').submit();
-                                           ">
-                                    ♥
+                                <a class="like_link" href="♥" id="a_like" data-post_id="{{ $post->id }}">
+                                    <span class="pull-right">
+                                        ♥
+                                    </span>
                                 </a>
-                                <a id="like_count" class="pull-right">0</a>
-                                <form id="form_like" name="form_like" action="{{ route('new_like') }}" method="POST">
-                                    <input type="hidden" id="post_id" name="post_id" value="{{ $post->id }}">
-                                    <input type="submit" name="submit" id="submit" value="submit">
-                                </form>
+                                <a id="like_count{{ $post->id }}" class="pull-right">0</a>
                             </div>
                         </div>
                     </div>
                 </div>
             @endforeach
+            {{ csrf_field() }}
         </div>
     </div>
 </div>
