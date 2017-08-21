@@ -29,10 +29,14 @@ $( document ).ready( function($) {
                 {
                     heart.removeClass("text-muted");
                     heart.addClass("text-primary");
+                    heart.removeClass("fa-heart-o");
+                    heart.addClass("fa-heart");
                 } else
                     {
                         heart.removeClass("text-primary");
                         heart.addClass("text-muted");
+                        heart.removeClass("fa-heart");
+                        heart.addClass("fa-heart-o");
                     }
             },
             'json'
