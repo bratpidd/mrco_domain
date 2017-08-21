@@ -52,12 +52,10 @@
 
                                 <a class="like_link" href="♥" id="a_like" data-post_id="{{ $post->id }}">
                                     @if ($post->my_like_count)
-                                    <span id="heart{{ $post->id }}" class="text-primary pull-right" style="font-size: 22px;">
+                                            <i id="heart{{ $post->id }}" class = "fa fa-heart fa-2x text-primary pull-right" style="font-size: 22px;"></i>
                                         @else
-                                            <span id="heart{{ $post->id }}" class="text-muted pull-right" style="font-size: 22px;">
+                                            <i id="heart{{ $post->id }}" class = "fa fa-heart-o fa-2x text-muted pull-right" style="font-size: 22px;"></i>
                                         @endif
-                                        ♥
-                                    </span>
                                 </a>
 
                                 <a id="like_count{{ $post->id }}" class="pull-right">
