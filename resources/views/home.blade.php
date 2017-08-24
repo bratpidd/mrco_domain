@@ -6,7 +6,6 @@
         <div class="col-md-4 col-md-offset-4">
             @foreach ($posts as $post)
                 <div class="panel panel-default">
-
                     <nav class="navbar navbar-inverse">
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
@@ -35,10 +34,7 @@
                                 {{ $post->created_at }}
                             </li>
                         </ul>
-
                     </nav>
-
-
                     <div class="panel-heading">
                         <strong><h2>{{ $post->title }}</h2></strong>
                     </div>
@@ -53,15 +49,9 @@
                                     <a class="like_link pull-right" href="♥" id="a_like" data-post_id="{{ $post->id }}">
                                         <div class="dropdown-content hul" id="hul{{ $post->id }}">
                                             <ul class="ul-hover">
-
                                             </ul>
-
                                         </div>
-                                        @if ($post->my_like_count)
-                                                <i id="heart{{ $post->id }}" class = "fa fa-heart fa-2x text-primary" style="font-size: 22px;"></i>
-                                            @else
-                                                <i id="heart{{ $post->id }}" class = "fa fa-heart-o fa-2x text-muted " style="font-size: 22px;"></i>
-                                            @endif
+                                        <i id="heart{{ $post->id }}" class = "fa fa-2x" style="font-size: 22px;"></i>
                                     </a>
                                 </div>
                                 <a id="like_count{{ $post->id }}" class="pull-right">
@@ -69,19 +59,17 @@
                                         {{ 0 }}
                                     </span>
                                 </a>
-
-
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <script>
+                    setLikesInfo( {{ $post->id }} );
+                </script>
             @endforeach
             {{ csrf_field() }}
         </div>
     </div>
 </div>
-<script>
-    setLikesInfo(3);
-</script>
 @endsection

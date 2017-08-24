@@ -30,7 +30,6 @@ class HomeController extends Controller
         with('author')
             ->withCount('comments')
             ->withCount('likes')
-            ->withCount('my_like')
             ->orderBy('created_at', 'desc')
             ->get();
         //dd($posts);
