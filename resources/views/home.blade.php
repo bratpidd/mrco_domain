@@ -47,11 +47,8 @@
                             <div class="col-md-2 pull-right">
                                 <div class="like_link dropdown pull-right" data-post_id="{{ $post->id }}">
                                     <a class="like_link pull-right" href="♥" id="a_like" data-post_id="{{ $post->id }}">
-                                        <div class="dropdown-content hul" id="hul{{ $post->id }}">
-                                            <ul class="ul-hover">
-                                                <li><a>1</a></li>
-                                                <li><a>2</a></li>
-                                                <li><a>3</a></li>
+                                        <div class="dropdown-content hul">
+                                            <ul class="ul-hover" id="hul{{ $post->id }}">
                                             </ul>
                                         </div>
                                         <i id="heart{{ $post->id }}" class = "fa fa-2x" style="font-size: 22px;"></i>
