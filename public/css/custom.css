@@ -33,6 +33,10 @@
 
 .ul-hover {
     padding: 0;
-    list-style-type: none;
     margin: 0;
+}
+
+.ul-hover > li
+{
+    list-style-type: none;
 }
