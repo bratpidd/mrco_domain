@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use URL;
 
 class LoginController extends Controller
 {
@@ -30,8 +31,9 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
-        //return route('home');
-        return $_SERVER['HTTP_REFERER'] ?? route('home');
+        return session('redirect');
+        //return $_SERVER['HTTP_REFERER'];
+        //return URL::previous();
     }
     /**
      * Create a new controller instance.

@@ -8,11 +8,13 @@ use Illuminate\Http\Request;
 use App\Post;
 use Auth;
 use App\User;
+use URL;
 
 class PostController extends Controller
 {
     function index($id)
     {
+        session(['redirect' => URL::current() ?? 'dick']);
         $post = Post::with('author')->withCount('comments')->where('id', '=', $id)->get();
         //dd($post[0]);
         $comments = Comment::with('author')->where('post_id', '=', $id)->orderBy('updated_at', 'desc')->get();
@@ -28,6 +30,7 @@ class PostController extends Controller
             'comments' => $comments,
             'subscribed' => $subscribed
         ]);
+
     }
 
     function index_post($id, Request $request) //add new commentary
