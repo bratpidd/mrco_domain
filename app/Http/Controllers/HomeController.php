@@ -64,7 +64,7 @@ class HomeController extends Controller
     public function subscribe(Request $request) //add subscription
     {
         $author_id = $request->get('author_id');
-        $user_id = Auth::user()->id;
+        $user_id = Auth::user()->id ?? -1;
 
         $exist = Subscription:://select('id')
             where('user_id', '=', $user_id)
@@ -73,7 +73,7 @@ class HomeController extends Controller
 
         //echo $user_id.' '.$author_id.' '.$exist->count();
 
-        //dd($exist);
+        //dd($exist)
         if ($exist->count() == 0)
         {
             $sub = new Subscription();
