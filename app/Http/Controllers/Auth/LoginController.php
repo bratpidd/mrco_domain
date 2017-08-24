@@ -30,7 +30,8 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
-        return route('home');
+        //return route('home');
+        return $_SERVER['HTTP_REFERER'] ?? route('home');
     }
     /**
      * Create a new controller instance.
