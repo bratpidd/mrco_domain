@@ -8,7 +8,7 @@ function setLikesInfo(post_id)
         },
         function( data ) {
             var ul = $('#hul'+post_id)[0];
-            ul.innerHTML = '';
+            //ul.innerHTML = '';
             var likers = data.likes_authors;
             likers.forEach(function(liker, i, likers)
             {
@@ -17,7 +17,7 @@ function setLikesInfo(post_id)
                 anchor.appendChild(document.createTextNode(liker));
                 anchor.setAttribute('href', 'newpost');
                 li.appendChild(anchor);
-                li.setAttribute('style', 'list-style-type: none;');
+                //li.setAttribute('style', 'list-style-type: none;');
                 ul.appendChild(li);
             });
 
