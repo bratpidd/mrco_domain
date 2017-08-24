@@ -13,7 +13,7 @@ class LikeController extends Controller
     public function getData(Request $request)
     {
         $post_id = $request->get('post_id');
-        $user_id = Auth::user()->id;
+        $user_id = Auth::user()->id ?? -1;
         $user_liked=Like::where('user_id', '=', $user_id)
             ->where('post_id', '=', $post_id)
             ->count();

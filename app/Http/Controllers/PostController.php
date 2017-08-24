@@ -16,12 +16,13 @@ class PostController extends Controller
         $post = Post::with('author')->withCount('comments')->where('id', '=', $id)->get();
         //dd($post[0]);
         $comments = Comment::with('author')->where('post_id', '=', $id)->orderBy('updated_at', 'desc')->get();
-     //   $commentNum = Post::find($id)->comments()->count();
-     //   $commentNum = Post::withCount('comments')->get();
+        //   $commentNum = Post::find($id)->comments()->count();
+        //   $commentNum = Post::withCount('comments')->get();
         //dd ($post);
         $author_id = $post[0]->author->id;
-        $subscribed =  Auth::user()->ifSubscribed($author_id);
-
+        if (Auth::check()) {
+            $subscribed = Auth::user()->ifSubscribed($author_id);
+        } else {$subscribed = 0;}
         return view('post',[
             'post' => $post[0],
             'comments' => $comments,

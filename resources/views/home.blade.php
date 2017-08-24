@@ -45,7 +45,7 @@
                                 <a href = '/post/{{ $post->id }}'>{{ $post->comments_count }} comments</a>
                             </div>
                             <div class="col-md-2 pull-right">
-                                <div class="like_link dropdown" data-post_id="{{ $post->id }}">
+                                <div class="like_link dropdown pull-right" data-post_id="{{ $post->id }}">
                                     <a class="like_link pull-right" href="♥" id="a_like" data-post_id="{{ $post->id }}">
                                         <div class="dropdown-content hul" id="hul{{ $post->id }}">
                                             <ul class="ul-hover">

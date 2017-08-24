@@ -11,17 +11,20 @@
                         <div class="col-md-4 text-center">
                             @if($subscribed) Subscribed
                             @else
-                                <a style="color: #CCCCCC"
-                                   href="{{ $post->author->id }}"
-                                   onclick="event.preventDefault();
-                                           document.getElementById('subscribe-form{{ $post->id }}').submit();">
-                                    Subscribe
-                                </a>
+                                @if (Auth::check())
+                                    <a style="color: #CCCCCC"
+                                       href="{{ $post->author->id }}"
+                                       onclick="event.preventDefault();
+                                               document.getElementById('subscribe-form{{ $post->id }}').submit();">
+                                        Subscribe
+                                    </a>
 
-                                <form id="subscribe-form{{ $post->id }}" action="{{ route('new_sub_submit') }}" method="POST" style="display: none;">
-                                    <input type="hidden" id="author_id" name="author_id" value="{{ $post->author->id }}">
-                                {{ csrf_field() }}
-                                </form>
+                                    <form id="subscribe-form{{ $post->id }}" action="{{ route('new_sub_submit') }}" method="POST" style="display: none;">
+                                        <input type="hidden" id="author_id" name="author_id" value="{{ $post->author->id }}">
+                                    {{ csrf_field() }}
+                                    </form>
+                                    @else SUCK DICK
+                                    @endif
                             @endif
                         </div>
                         <div class="col-md-4 text-right">{{ $post->created_at }}</div>

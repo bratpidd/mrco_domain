@@ -61,12 +61,15 @@ class SubController extends Controller
 
     public function cancel_sub(Request $request)
     {
-        $user_id = Auth::user()->id;
-        $author_id = $request->get('author_id');
-        //echo $user_id.' '.$author_id;
+        if (Auth::check())
+        {
+            $user_id = Auth::user()->id;
+            $author_id = $request->get('author_id');
+            //echo $user_id.' '.$author_id;
 
-        Subscription::where('user_id', '=', $user_id)
-            ->where('author_id', '=', $author_id)->delete();
-        return redirect('/sub');
+            Subscription::where('user_id', '=', $user_id)
+                ->where('author_id', '=', $author_id)->delete();
+            return redirect('/sub');
+        }
     }
 }
