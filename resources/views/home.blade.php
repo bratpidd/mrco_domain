@@ -53,10 +53,9 @@
                                     <a class="like_link pull-right" href="♥" id="a_like" data-post_id="{{ $post->id }}">
                                         <div class="dropdown-content hul" id="hul{{ $post->id }}">
                                             <ul class="ul-hover">
-                                                <li><a href="#">Link 1</a></li>
-                                                <li>Link 2</li>
-                                                <li><a href="#">Link 3</a></li>
+
                                             </ul>
+
                                         </div>
                                         @if ($post->my_like_count)
                                                 <i id="heart{{ $post->id }}" class = "fa fa-heart fa-2x text-primary" style="font-size: 22px;"></i>
@@ -67,7 +66,7 @@
                                 </div>
                                 <a id="like_count{{ $post->id }}" class="pull-right">
                                     <span id="label{{ $post->id }}" class="text-muted " style="font-size: 22px;">
-                                        {{ $post->likes_count }}
+                                        {{ 0 }}
                                     </span>
                                 </a>
 
@@ -76,10 +75,13 @@
                         </div>
                     </div>
                 </div>
+
             @endforeach
             {{ csrf_field() }}
         </div>
     </div>
 </div>
-
+<script>
+    setLikesInfo(3);
+</script>
 @endsection

@@ -1,3 +1,48 @@
+function setLikesInfo(post_id)
+{
+    $.post(
+        '/likes_getdata',
+        {
+            "_token": $('meta[name="csrf-token"]').attr('content'),
+            "post_id": post_id
+        },
+        function( data ) {
+            var ul = $('#hul'+post_id)[0];
+            ul.innerHTML = '';
+            var likers = data.likes_authors;
+            likers.forEach(function(liker, i, likers)
+            {
+                var li = document.createElement("li");
+                var anchor = document.createElement('a');
+                anchor.appendChild(document.createTextNode(liker));
+                anchor.setAttribute('href', 'newpost');
+                li.appendChild(anchor);
+                li.setAttribute('style', 'list-style-type: none;');
+                ul.appendChild(li);
+            });
+
+            var label = $('#label'+post_id);
+            label.text(data.likes_count);
+
+            var heart = $('#heart'+post_id);
+            if (data.user_liked)
+            {
+                heart.removeClass("text-muted");
+                heart.addClass("text-primary");
+                heart.removeClass("fa-heart-o");
+                heart.addClass("fa-heart");
+            } else
+            {
+                heart.removeClass("text-primary");
+                heart.addClass("text-muted");
+                heart.removeClass("fa-heart");
+                heart.addClass("fa-heart-o");
+            }
+        },
+        'json'
+    );
+}
+
 $( document ).ready( function($) {
 
     $('.hul').on('click', function(event)
@@ -25,40 +70,9 @@ $( document ).ready( function($) {
             },
             function( data ) {
                 //$('.submit').html(data);
-                 //alert( "Data Loaded: " + data.likes_authors[0]['username'] );
+                 //alert( "Data Loaded: " + data.likes_authors);
                 //do something with data/response returned by server
-                var ul = $('#hul'+post_id)[0];
-                ul.innerHTML = '';
-                var likers = data.likes_authors;
-                likers.forEach(function(liker, i, likers)
-                {
-                    var li = document.createElement("li");
-                    var anchor = document.createElement('a');
-                    var user=liker['username'];
-                    anchor.appendChild(document.createTextNode(user));
-                    anchor.setAttribute('href', 'newpost');
-                    li.appendChild(anchor);
-                    li.setAttribute('style', 'list-style-type: none;');
-                    ul.appendChild(li);
-                });
-
-                var label = $('#label'+post_id);
-                label.text(data.likes_count);
-
-                var heart = $('#heart'+post_id);
-                if (data.result == 'added')
-                {
-                    heart.removeClass("text-muted");
-                    heart.addClass("text-primary");
-                    heart.removeClass("fa-heart-o");
-                    heart.addClass("fa-heart");
-                } else
-                    {
-                        heart.removeClass("text-primary");
-                        heart.addClass("text-muted");
-                        heart.removeClass("fa-heart");
-                        heart.addClass("fa-heart-o");
-                    }
+                setLikesInfo(post_id);
             },
             'json'
         );
