@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="">
-    <div class="row">
+    <div class="row no-container">
         <div class="col-md-4 col-md-offset-4">
             @foreach ($posts as $post)
                 <div class="panel panel-default">
@@ -48,21 +48,30 @@
                             <div class="col-md-6">
                                 <a href = '/post/{{ $post->id }}'>{{ $post->comments_count }} comments</a>
                             </div>
-                            <div class="col-md-6">
-
-                                <a class="like_link" href="♥" id="a_like" data-post_id="{{ $post->id }}">
-                                    @if ($post->my_like_count)
-                                            <i id="heart{{ $post->id }}" class = "fa fa-heart fa-2x text-primary pull-right" style="font-size: 22px;"></i>
-                                        @else
-                                            <i id="heart{{ $post->id }}" class = "fa fa-heart-o fa-2x text-muted pull-right" style="font-size: 22px;"></i>
-                                        @endif
-                                </a>
-
+                            <div class="col-md-2 pull-right">
+                                <div class="like_link dropdown" data-post_id="{{ $post->id }}">
+                                    <a class="like_link pull-right" href="♥" id="a_like" data-post_id="{{ $post->id }}">
+                                        <div class="dropdown-content hul" id="hul{{ $post->id }}">
+                                            <ul class="ul-hover">
+                                                <li><a href="#">Link 1</a></li>
+                                                <li>Link 2</li>
+                                                <li><a href="#">Link 3</a></li>
+                                            </ul>
+                                        </div>
+                                        @if ($post->my_like_count)
+                                                <i id="heart{{ $post->id }}" class = "fa fa-heart fa-2x text-primary" style="font-size: 22px;"></i>
+                                            @else
+                                                <i id="heart{{ $post->id }}" class = "fa fa-heart-o fa-2x text-muted " style="font-size: 22px;"></i>
+                                            @endif
+                                    </a>
+                                </div>
                                 <a id="like_count{{ $post->id }}" class="pull-right">
-                                    <span id="label{{ $post->id }}" class="text-muted pull-right" style="font-size: 22px;">
-                                        ({{ $post->likes_count }})
+                                    <span id="label{{ $post->id }}" class="text-muted " style="font-size: 22px;">
+                                        {{ $post->likes_count }}
                                     </span>
                                 </a>
+
+
                             </div>
                         </div>
                     </div>
@@ -72,4 +81,5 @@
         </div>
     </div>
 </div>
+
 @endsection

@@ -42,5 +42,10 @@ class Post extends Model
             ->where('user_id', '=', $user_id);
     }
 
+  //  public function users_liked()
+  //  {
+  //      return $this->hasManyThrough('App\User', 'App\Like','')
+ //   }
+
 
 }

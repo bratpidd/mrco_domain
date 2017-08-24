@@ -1,0 +1,38 @@
+.no-container {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 100%;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 2px 2px;
+    text-decoration: none;
+    display: block;
+
+}
+
+.ul-hover {
+    padding: 0;
+    list-style-type: none;
+    margin: 0;
+}

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Like;
 use Auth;
 use App\Post;
+use App\User;
 
 class LikeController extends Controller
 {
@@ -36,13 +37,27 @@ class LikeController extends Controller
         $likes_count = Like::
         where('post_id', '=', $post_id)
             ->count();
+
+        $likes_authors = Like
+            ::where('post_id' , '=', $post_id)
+            -> join ('users', 'users.id', '=', 'likes.user_id')
+            -> select ('users.username')
+            ->orderBy('users.username', 'asc')
+            -> get()
+            ->toArray();
+
+        //$likes_authors = json
+
         $response = array(
             'status' => 'suckcess',
             'msg' => 'Setting created successfully',
             'post' => 'ya tvou mamu ebal',
             'result' => $result,
-            'likes_count' => $likes_count
+            'likes_count' => $likes_count,
+            'likes_authors' => ($likes_authors)
         );
+
+        //dd($likes_authors);
         //echo 'cock dick';
         return \Response::json( $response );
     }
