@@ -32,3 +32,5 @@ Route::post('/cancelsub', 'SubController@cancel_sub')->name('cancel_sub');
 
 Route::post('/new_like', 'LikeController@index')->name('new_like');
 Route::post('/likes_getdata', 'LikeController@getData')->name('likes_getdata');
+
+Route::get('/vue_retarded', 'HomeController@vue_test')->name('vue_test');

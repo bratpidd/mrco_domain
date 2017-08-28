@@ -72,6 +72,7 @@ $( document ).ready( function($) {
                  //alert( "Data Loaded: " + data.likes_authors);
                 //do something with data/response returned by server
                 setLikesInfo(post_id);
+
             },
             'json'
         );

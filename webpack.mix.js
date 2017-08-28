@@ -13,3 +13,12 @@ let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
+
+const elixir = require('laravel-elixir');
+
+require('laravel-elixir-vue-2');
+
+elixir((mix) => {
+    mix.sass('app.scss')
+        .webpack('app.js');
+});

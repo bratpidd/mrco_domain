@@ -87,4 +87,9 @@ class HomeController extends Controller
                 return redirect(route('home'));
             }
     }
+
+    public function vue_test()
+    {
+        return view('vue_test');
+    }
 }
