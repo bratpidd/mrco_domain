@@ -1,6 +1,6 @@
 let mix = require('laravel-mix');
 
-require('laravel-mix-vue-2');
+//require('laravel-mix-vue-2');
 
 /*
  |--------------------------------------------------------------------------
@@ -15,4 +15,3 @@ require('laravel-mix-vue-2');
 
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
-

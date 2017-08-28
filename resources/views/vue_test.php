@@ -4,8 +4,10 @@
 </head>
 <body>
 <div id="app">
+
     <example></example>
+    <script src="js/app.js"></script>
 </div>
-<script src="js/app.js"></script>
+
 </body>
 </html>

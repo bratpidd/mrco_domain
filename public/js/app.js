@@ -799,8 +799,10 @@ window.Vue = __webpack_require__(35);
 
 Vue.component('example', __webpack_require__(36));
 
-var app = new Vue({
-  el: '#app'
+document.addEventListener('DOMContentLoaded', function () {
+  var app = new Vue({
+    el: '#app'
+  });
 });
 
 /***/ }),
@@ -41966,7 +41968,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel panel-default"
   }, [_c('div', {
     staticClass: "panel-heading"
-  }, [_vm._v("rrrr Component")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("rrtrr Coponent")]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
   }, [_vm._v("\n                    Eto kajis real vue, ebatj\n                ")])])])])])
 }]}
