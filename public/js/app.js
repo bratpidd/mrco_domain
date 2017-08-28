@@ -41966,9 +41966,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel panel-default"
   }, [_c('div', {
     staticClass: "panel-heading"
-  }, [_vm._v("Example Component")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("rrrr Component")]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
-  }, [_vm._v("\n                    I'm an example component!\n                ")])])])])])
+  }, [_vm._v("\n                    Eto kajis real vue, ebatj\n                ")])])])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
