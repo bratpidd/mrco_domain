@@ -1,5 +1,7 @@
 <html>
-<head></head>
+<head>
+    <link href="css/app.css" rel="stylesheet">
+</head>
 <body>
 <div id="app">
     <example></example>
