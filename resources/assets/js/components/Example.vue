@@ -1,23 +1,18 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">rrtrr Coponent</div>
-
-                    <div class="panel-body">
-                        Eto kajis real vue, ebatj
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <hello></hello>
 </template>
-
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
+        name: 'example',
     }
 </script>
+<style>
+    #app {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+        margin-top: 60px;
+    }
+</style>

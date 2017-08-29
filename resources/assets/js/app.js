@@ -16,6 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('hello', require('./components/Hello.vue'));
 
 document.addEventListener('DOMContentLoaded', function(){
     const app = new Vue({
