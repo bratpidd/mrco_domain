@@ -1,11 +1,9 @@
 <html>
-<head>
-    <link href="css/app.css" rel="stylesheet">
-</head>
 <body>
-<div id="app">
-    <example></example>
+<div id="app_core">
+<app></app>
 </div>
-<script src="js/app.js"></script>
+<script src="/js/app.js"></script>
+
 </body>
 </html>
