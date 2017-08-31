@@ -31,7 +31,8 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
-        return session('redirect');
+        $redir = session('redirect');
+        session('redirect');
         //return $_SERVER['HTTP_REFERER'];
         //return URL::previous();
     }

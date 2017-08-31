@@ -29,9 +29,13 @@
             <input type="text" v-model="input_val"><br>
             Input Value: <span v-text="input_val"></span>
         </div>
+        <input type="button" id="btn1" :value="btn_text[0]" v-on:click="ajax_retarded">
+        <span id="SPAN1">SPAN1</span>
+        <a href="/login" v-if = login_link>zaloginsya debil</a>
     </div>
 </template>
 <script>
+
     export default {
         name: 'hello',
         data () {
@@ -43,10 +47,56 @@
                     {firstname: 'John', lastname: 'Porter'}
                 ],
                 input_val: '',
+                login_link: false,
+                btn_text: [],
             }
 
+        },
+        methods: {
+            ajax_retarded: function (event) {
+                let thiss = this;
+                // `this` внутри методов указывает на экземпляр Vue
+                //alert('Привет, ' + this.name + '!')
+                // `event` — нативное событие DOM
+                if (event) {
+                   // alert(event.target.tagName)
+                }
+
+                axios.post('/test_post', {
+                    firstName: 'Fred',
+                    lastName: 'Flintstone',
+                   // _token: csrf_token,
+
+                })
+                    .then(function (response) {
+                        //document.getElementById('btn1').value = 'poshel nahuy';
+                        console.log(response);
+
+                        let resp = response.data.username;
+                        thiss.login_link = true;
+                        thiss.btn_text[0] = "t";
+                       // btn = document.getElementById('btn1');
+                        //alert(resp);
+                        if (resp) {
+                            //btn.value = resp;
+                            thiss.login_link = false;
+                            thiss.btn_text[0] = resp;
+                        } else {
+                           // btn.value = "poshel nahuy";
+                           // btn.value = resp;
+                            thiss.login_link = true;
+                            thiss.btn_text[0] = 'poshel nahuy';
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+            }
         }
     }
+
+
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

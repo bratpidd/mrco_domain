@@ -35,3 +35,5 @@ Route::post('/likes_getdata', 'LikeController@getData')->name('likes_getdata');
 
 Route::get('/vue_retarded', 'HomeController@vue_test')->name('vue_test');
 Route::get('/vue_retarded/about', 'HomeController@vue_test')->name('vue_test');
+
+Route::post('/test_post', 'HomeController@test_post')->name('test_post');

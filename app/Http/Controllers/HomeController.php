@@ -92,4 +92,10 @@ class HomeController extends Controller
     {
         return view('vue_test');
     }
+
+    public function test_post()
+    {
+        $response = Auth::user() or 'dez';
+        return $response;
+    }
 }
