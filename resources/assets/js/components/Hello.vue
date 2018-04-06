@@ -73,6 +73,7 @@
                         console.log(response);
 
                         let resp = response.data.username;
+                        //let resp=response.data;
                         thiss.login_link = true;
                         thiss.btn_text[0] = "t";
                        // btn = document.getElementById('btn1');

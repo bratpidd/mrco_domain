@@ -40,3 +40,19 @@
 {
     list-style-type: none;
 }
+
+.paddy{
+    padding: 15px;
+    padding-left: 20px
+}
+
+
+
+a.canceltag {
+    color:darkred;
+    text-decoration: none;
+}
+
+a.canceltag:hover {
+    color: red;
+}

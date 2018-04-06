@@ -22,14 +22,21 @@ Vue.use(VueRouter);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
-Vue.component('hello', require('./components/Hello.vue'));
-//Vue.component('about', require('./components/about.vue'));
-Vue.component('app', require('./components/app.vue'));
-
-
 import hello from './components/Hello'
-import about from './components/About'
+import about from './components/about'
+import app from './components/app'
+
+Vue.component('example', require('./components/Example.vue'));
+Vue.component('hello', hello);
+Vue.component('about', about);
+Vue.component('app', app);
+Vue.component('tag-item', {
+    template:   '<div class="form-group paddy">' +
+                '<span class="label label-default span-margin">{{title}}<button class="canceltag" v-on:click="$emit(\'nigger\')">🗙</button></span>' +
+                '</div>',
+    props: ['title']
+});
+
 
 const routes = [
     //route for the home route of the web page
@@ -46,6 +53,7 @@ const router = new VueRouter({
 document.addEventListener('DOMContentLoaded', function(){
     const app = new Vue({
         el: '#app_core',
+
         router
     });
 });
