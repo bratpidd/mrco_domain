@@ -1427,7 +1427,7 @@ Vue.component('hello', __WEBPACK_IMPORTED_MODULE_1__components_Hello___default.a
 Vue.component('about', __WEBPACK_IMPORTED_MODULE_2__components_about___default.a);
 Vue.component('app', __WEBPACK_IMPORTED_MODULE_3__components_app___default.a);
 Vue.component('tag-item', {
-    template: '<div class="form-group paddy">' + '<span class="label label-default span-margin">{{title}}<button class="canceltag" v-on:click="$emit(\'nigger\')">🗙</button></span>' + '</div>',
+    template: '<div class="form-group paddy">' + '<span class="label label-default span-margin">{{title}}<a href="javascript:void(0)" class="canceltag" v-on:click="$emit(\'nigger\')">🗙</a></span>' + '</div>',
     props: ['title']
 });
 

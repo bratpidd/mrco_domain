@@ -32,7 +32,7 @@ Vue.component('about', about);
 Vue.component('app', app);
 Vue.component('tag-item', {
     template:   '<div class="form-group paddy">' +
-                '<span class="label label-default span-margin">{{title}}<button class="canceltag" v-on:click="$emit(\'nigger\')">🗙</button></span>' +
+                '<span class="label label-default span-margin">{{title}}<a href="javascript:void(0)" class="canceltag" v-on:click="$emit(\'nigger\')">🗙</a></span>' +
                 '</div>',
     props: ['title']
 });
