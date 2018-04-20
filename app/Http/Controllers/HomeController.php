@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Tag;
 use App\Subscription;
 use Illuminate\Http\Request;
 use Auth;
@@ -58,6 +59,48 @@ class HomeController extends Controller
         else
         {
             return view('blank');
+        }
+    }
+
+    public function vue_newpost(Request $request) //add a new post via VUE/ajax/axios/etc
+    {
+        //alert('1');
+        if (Auth::check())
+        {
+            $user_id = Auth::user()->id;
+
+            $title = $request->get('title');
+            $content = $request->get('content');
+            $tags = $request->get('tags');
+
+            $post = new Post();
+            $post->user_id = $user_id;
+            $post->title = $title;
+            $post->content = $content;
+
+            $post->save();
+            /* now we need to get the last post ID (which is written by curent user!) to associate tags with it */
+            $lastPost = Post::where('user_id', '=', $user_id)
+                ->latest()->first();
+            $lastPostID = $lastPost['id'];
+            /* write down all the tags */
+            foreach ($tags as $key => $value)
+            {
+                $tag = new Tag();
+                $tag->title = $value['title'];
+                $tag->post_id = $lastPostID;
+                $tag->save();
+            }
+            $response='yёr post addad successfully';
+            //$lastPostTags = Post::with('tags')->latest()->first();
+            //$response = Post::latest()->first()->tags_array();
+            //$response = $lastPostID;
+            //$response = $tags[0]['title'] ?? 'zaga';
+            return $response;
+        }
+        else
+        {
+            return 'zaga';
         }
     }
 

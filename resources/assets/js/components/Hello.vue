@@ -58,9 +58,9 @@
                 // `this` внутри методов указывает на экземпляр Vue
                 //alert('Привет, ' + this.name + '!')
                 // `event` — нативное событие DOM
-                if (event) {
+                //if (event) {
                    // alert(event.target.tagName)
-                }
+                //}
 
                 axios.post('/test_post', {
                     firstName: 'Fred',

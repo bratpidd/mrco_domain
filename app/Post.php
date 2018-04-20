@@ -14,6 +14,20 @@ use Auth;
  */
 class Post extends Model
 {
+    public function tags_array(){
+        $tags = $this->hasMany('App\Tag','post_id')->get();
+        $tags_array = array();
+        foreach ($tags as $key=> $value){
+            $tags_array[] = $value['title'];
+        }
+        //$tags_array[]='zaga';
+        return $tags_array;
+    }
+
+    public function tags(){
+        return $this->hasMany('App\Tag', 'post_id');
+    }
+
     public function comments()
     {
         return $this->hasMany('App\Comment', 'post_id');

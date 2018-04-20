@@ -53,6 +53,7 @@ class LikeController extends Controller
 
     public function index(Request $request)
     {
+        //alert('1');
         $post_id = $request->get('post_id');
         $user_id = Auth::user()->id;
         $exist=Like::where('user_id', '=', $user_id)

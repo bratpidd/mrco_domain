@@ -34,7 +34,11 @@
                     </div>
                     <div class="panel-body">{{ $post->content }}</div>
                 </div>
-
+                <div class="">
+                    @foreach ($post->tags_array() as $tag)
+                        #{{ $tag }}
+                    @endforeach
+                </div>
                 @foreach ($comments as $comment)
                     <div class="panel panel-default">
                         <div class="panel-heading">

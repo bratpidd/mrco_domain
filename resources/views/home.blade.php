@@ -43,8 +43,13 @@
                     <div class="panel-body">{{ $post->content }}</div>
                     <div class="panel-footer">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <a href = '/post/{{ $post->id }}'>{{ $post->comments_count }} comments</a>
+                            </div>
+                            <div class="col-md-7">
+                                @foreach ($post->tags_array() as $tag)
+                                    #{{ $tag }}
+                                @endforeach
                             </div>
                             <div class="col-md-2 pull-right">
                                 <div class="like_link dropdown pull-right" data-post_id="{{ $post->id }}">

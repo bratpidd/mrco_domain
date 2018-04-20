@@ -46311,9 +46311,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // `this` внутри методов указывает на экземпляр Vue
             //alert('Привет, ' + this.name + '!')
             // `event` — нативное событие DOM
-            if (event) {
-                // alert(event.target.tagName)
-            }
+            //if (event) {
+            // alert(event.target.tagName)
+            //}
 
             axios.post('/test_post', {
                 firstName: 'Fred',
@@ -46688,32 +46688,86 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'about',
     data: function data() {
         return {
             nextTagTitle: '',
-            tags: [{
-                id: 1,
-                title: 'dick'
-            }],
-            nextTagId: 2
+            post_title: '',
+            post_text: '',
+            post_tags: [],
+            nextTagId: 1
         };
     },
 
+
     methods: {
         addNewTag: function addNewTag() {
-            this.tags.push({
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+
+                for (var _iterator = this.post_tags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var tag = _step.value;
+
+                    if (this.nextTagTitle == tag.title || this.nextTagTitle.length == 0) {
+                        return;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            this.post_tags.push({
                 id: this.nextTagId++,
                 title: this.nextTagTitle
             });
             this.nextTagTitle = '';
         },
+
         removeTag: function removeTag(id) {
-            this.tags.splice(id, 1);
+            this.post_tags.splice(id, 1);
+        },
+
+        post_submit: function post_submit(event) {
+            //alert(this.post_title);
+            if (this.post_text.length == 0) {
+                alert('rejected: text is emptu');
+                return;
+            }
+
+            if (this.post_title.length == 0) {
+                alert('rejected: title is emptu');
+                return;
+            }
+
+            var resp = {};
+            axios.post('/vue_newpost', {
+                title: this.post_title,
+                content: this.post_text,
+                tags: this.post_tags
+            }).then(function (response) {
+                console.log(response);
+                resp = response.data;
+                alert(resp);
+                window.location.href = '/';
+            }).catch(function (error) {
+                console.log(error);
+            });
         }
 
     }
@@ -46734,151 +46788,203 @@ var render = function() {
           _c("div", { staticClass: "panel-heading" }, [_vm._v("New Post")]),
           _vm._v(" "),
           _c("div", { staticClass: "panel-body" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-2 control-label",
-                  attrs: { for: "tags" }
-                },
-                [_vm._v("Tags")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-8" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.nextTagTitle,
-                      expression: "nextTagTitle"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "tags", type: "text", name: "tags", value: "" },
-                  domProps: { value: _vm.nextTagTitle },
-                  on: {
-                    keyup: function($event) {
-                      if (
-                        !("button" in $event) &&
-                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                      ) {
-                        return null
-                      }
-                      return _vm.addNewTag($event)
-                    },
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.nextTagTitle = $event.target.value
-                    }
+            _c(
+              "form",
+              {
+                staticClass: "form-horizontal",
+                attrs: { id: "formPost", method: "POST", action: "" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
                   }
-                })
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "panel col-md-offset-2 col-md-8 form-inline",
-                  staticStyle: { "min-height": "50px" }
-                },
-                [
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
                   _c(
-                    "h3",
-                    _vm._l(_vm.tags, function(tag, index) {
-                      return _c("tag-item", {
-                        key: tag.id,
-                        attrs: { title: tag.title },
-                        on: {
-                          nigger: function($event) {
-                            _vm.removeTag(index)
-                          }
+                    "label",
+                    {
+                      staticClass: "col-md-2 control-label",
+                      attrs: { for: "title" }
+                    },
+                    [_vm._v("Title")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-8" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.post_title,
+                          expression: "post_title"
                         }
-                      })
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "title",
+                        type: "text",
+                        name: "title",
+                        value: "",
+                        required: ""
+                      },
+                      domProps: { value: _vm.post_title },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.post_title = $event.target.value
+                        }
+                      }
                     })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 control-label",
+                      attrs: { for: "content" }
+                    },
+                    [_vm._v("Text")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-8" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.post_text,
+                          expression: "post_text"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "content",
+                        name: "content",
+                        rows: "5",
+                        required: ""
+                      },
+                      domProps: { value: _vm.post_text },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.post_text = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 control-label",
+                      attrs: { for: "tags" }
+                    },
+                    [_vm._v("Tags")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-8" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.nextTagTitle,
+                          expression: "nextTagTitle"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "tags",
+                        type: "text",
+                        name: "tags",
+                        value: ""
+                      },
+                      domProps: { value: _vm.nextTagTitle },
+                      on: {
+                        keyup: function($event) {
+                          if (
+                            !("button" in $event) &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          return _vm.addNewTag($event)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.nextTagTitle = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-md-offset-2 col-md-8 form-inline" },
+                    [
+                      _c(
+                        "h3",
+                        _vm._l(_vm.post_tags, function(tag, index) {
+                          return _c("tag-item", {
+                            key: tag.id,
+                            attrs: { title: tag.title },
+                            on: {
+                              nigger: function($event) {
+                                _vm.removeTag(index)
+                              }
+                            }
+                          })
+                        })
+                      )
+                    ]
                   )
-                ]
-              )
-            ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: { click: _vm.post_submit }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                    Submit\n                                "
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ]
+            )
           ])
         ])
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "form",
-      { staticClass: "form-horizontal", attrs: { method: "POST", action: "" } },
-      [
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            { staticClass: "col-md-2 control-label", attrs: { for: "title" } },
-            [_vm._v("Title")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-8" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                id: "title",
-                type: "text",
-                name: "title",
-                value: "",
-                required: ""
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            {
-              staticClass: "col-md-2 control-label",
-              attrs: { for: "content" }
-            },
-            [_vm._v("Text")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-8" }, [
-            _c("textarea", {
-              staticClass: "form-control",
-              attrs: {
-                id: "content",
-                name: "content",
-                rows: "15",
-                required: ""
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
-            _c(
-              "button",
-              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-              [
-                _vm._v(
-                  "\n                                    Submit\n                                "
-                )
-              ]
-            )
-          ])
-        ])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
