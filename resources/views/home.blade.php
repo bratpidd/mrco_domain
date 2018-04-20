@@ -48,7 +48,7 @@
                             </div>
                             <div class="col-md-7">
                                 @foreach ($post->tags_array() as $tag)
-                                    #{{ $tag }}
+                                    -={{ $tag }}=-
                                 @endforeach
                             </div>
                             <div class="col-md-2 pull-right">
