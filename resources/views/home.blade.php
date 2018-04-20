@@ -38,7 +38,7 @@
                         </ul>
                     </nav>
                     <div class="panel-heading">
-                        <strong><h2>{{ $post->title }}</h2></strong>
+                        <strong>{{ $post->title }}</strong>
                     </div>
                     <div class="panel-body">{{ $post->content }}</div>
                     <div class="panel-footer">
