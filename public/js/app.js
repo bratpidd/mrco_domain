@@ -46750,7 +46750,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return;
             }
 
-            if (this.post_title.length == 0) {
+            if (this.post_title.length === 0) {
                 alert('rejected: title is emptu');
                 return;
             }
