@@ -45,7 +45,7 @@
         name: 'hello',
         data () {
             return {
-                msg: 'doomfisttttttttt to Your Vue.js App',
+                msg: 'doomfistttttttttttttttt to Your Vue.js App',
                 users: [
                     {firstname: 'Sebastian', lastname: 'Eschweiler'},
                     {firstname: 'Bill', lastname: 'Smith'},
