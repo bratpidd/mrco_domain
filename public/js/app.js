@@ -46787,7 +46787,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         post_submit: function post_submit(event) {
             //alert(this.post_title);
             if (this.post_text.length == 0) {
-                alert('rejected: text is emptu');
+                alert('rejected: text is emeptu');
                 return;
             }
 

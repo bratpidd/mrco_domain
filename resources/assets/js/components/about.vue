@@ -100,7 +100,7 @@
             post_submit: function (event){
 //alert(this.post_title);
                 if (this.post_text.length == 0){
-                    alert('rejected: text is emptu');
+                    alert('rejected: text is emeptu');
                     return;
                 }
 
