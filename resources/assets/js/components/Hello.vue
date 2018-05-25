@@ -32,10 +32,15 @@
         <input type="button" id="btn1" :value="btn_text[0]" v-on:click="ajax_retarded">
         <span id="SPAN1">SPAN1</span>
         <a href="/login" v-if = login_link>zaloginsya debil</a>
+
+        <autocomplete :suggestions="sugg"  :value= "selection"
+                      @input_AC = "ACInputHandler($event)"
+        ></autocomplete>
     </div>
+
+
 </template>
 <script>
-
     export default {
         name: 'hello',
         data () {
@@ -49,10 +54,35 @@
                 input_val: '',
                 login_link: false,
                 btn_text: [],
+
+                selection: '',
+                sugg: [
+                    { text: 'Bangalore', state: 'Karnataka' },
+                    { text: 'Chennai', state: 'Tamil Nadu' },
+                    { text: 'Delhi', state: 'Delhi' },
+                    { text: 'Kolkata', state: 'West Bengal' },
+                    { text: 'Mumbai', state: 'Maharashtra' },
+                ]
             }
 
         },
         methods: {
+            ACInputHandler(event){
+                let sel = this.selection = event;
+                axios.post('/get_tags', {
+                    searchString: sel,
+                })
+                    .then(function (response){
+                        console.log(response.data);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+
+            requestSuggestions(selection){
+                alert(this.selection);
+            },
             ajax_retarded: function (event) {
                 let thiss = this;
                 // `this` внутри методов указывает на экземпляр Vue

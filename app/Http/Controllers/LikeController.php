@@ -29,7 +29,7 @@ class LikeController extends Controller
             -> join ('users', 'users.id', '=', 'likes.user_id')
             -> select ('users.username')
             ->orderBy('users.username', 'asc')
-            -> get()
+            ->get()
             ->toArray();
 
         $likes_authors = array();

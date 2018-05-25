@@ -25,11 +25,14 @@ Vue.use(VueRouter);
 import hello from './components/Hello'
 import about from './components/about'
 import app from './components/app'
+import autocomplete from './components/Autocomplete'
 
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('hello', hello);
 Vue.component('about', about);
 Vue.component('app', app);
+Vue.component('autocomplete', autocomplete);
+
 Vue.component('tag-item', {
     template:   '<div class="form-group paddy">' +
                 '<span class="label label-default span-margin">{{title}}<a href="javascript:void(0)" class="canceltag" v-on:click="$emit(\'nigger\')">🗙</a></span>' +

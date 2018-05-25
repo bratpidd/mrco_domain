@@ -142,4 +142,21 @@ class HomeController extends Controller
         return $response;
         //return $request->get('lastName');
     }
+
+    public function get_tags(Request $request){
+        $response = 'suck my dick';
+        $searchString = $request->get('searchString').'%';
+        $tags = Tag::
+        where('title', 'like', $searchString)
+            ->select('title')
+            ->get()
+            ->toArray();
+        $tags_out = array();
+        foreach ($tags as $k => $v)
+        {
+            $tags_out[] = $v['title'];
+        }
+        $response = $tags_out;
+        return $response;
+    }
 }
