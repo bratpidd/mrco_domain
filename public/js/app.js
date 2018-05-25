@@ -46307,7 +46307,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: 'hello',
     data: function data() {
         return {
-            msg: 'wwwel to Your Vue.js App',
+            msg: 'doomfistl to Your Vue.js App',
             users: [{ firstname: 'Sebastian', lastname: 'Eschweiler' }, { firstname: 'Bill', lastname: 'Smith' }, { firstname: 'John', lastname: 'Porter' }],
             input_val: '',
             login_link: false,
