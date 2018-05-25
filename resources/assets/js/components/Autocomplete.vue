@@ -7,7 +7,9 @@
                @input="updateValue($event.target.value)"
                @keydown.enter = 'enter'
                @keydown.down = 'down'
-               @keydown.up = 'up'>
+               @keydown.up = 'up'
+               @keydown.space = "$emit('key_space')"
+        >
         <ul class="dropdown-menu" style="width:100%"
 
             @mouseover="setSuggestionsFocus()"
@@ -50,13 +52,14 @@
 
         computed: {
             matches () {
-                return this.suggestions.filter((obj) => {
-                    return obj.text.toLowerCase().indexOf(this.value.toLowerCase()) >= 0
-                })
+                //return this.suggestions.filter((obj) => {
+                  //  return obj.text.toLowerCase().indexOf(this.value.toLowerCase()) >= 0
+                //}
+                return this.suggestions;
             },
 
             openSuggestion () {
-                console.log(this.value)
+                //console.log(this.value)
                 return this.value !== '' &&
                     this.matches.length !==0 &&
                      this.open === true;
@@ -96,7 +99,12 @@
             },
 
             enter () {
-                this.$emit('input_AC', this.matches[this.current].text);
+                let TextToEmit = this.value;
+                let thiss = this;
+                if (thiss.matches[thiss.current] !== undefined)
+                    {TextToEmit = this.matches[this.current].text}
+                this.$emit('input_AC', TextToEmit);
+                this.$emit('submit');
                 this.open = false;
             },
 
@@ -118,6 +126,7 @@
 
             suggestionClick (index) {
                 this.$emit('input_AC', this.matches[index].text);
+                this.$emit('submit');
                 this.open = false;
             }
         }

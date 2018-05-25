@@ -27,7 +27,11 @@
                                 <label for="tags" class="col-md-2 control-label">Tags</label> <!--TAGS-->
 
                                 <div class="col-md-8">
-                                    <input v-model="nextTagTitle" @keyup.enter="addNewTag" id="tags" type="text" class="form-control" name="tags" value="">
+                                    <autocomplete :suggestions="sugg"  :value= "tagInput"
+                                                  @input_AC = "ACInputHandler($event)"
+                                                  @submit = "addNewTag"
+                                                  id = "tags"
+                                    ></autocomplete>
                                 </div>
                             </div>
 
@@ -73,23 +77,58 @@
                 post_text:'',
                 post_tags: [],
                 nextTagId: 1,
+                tagInput: '',
+                sugg: [],
             }
         },
 
         methods: {
+            tagWritten: function (tag) {
+                let resp = false;
+                this.post_tags.forEach(function (item) {
+                    if (tag === item.title){
+                        //console.log('true!');
+                        resp = true;
+                    }
+                    //console.log(item.title);
+                });
+                return resp;
+            },
+
+            ACInputHandler(event){
+                let sel = this.tagInput = event;
+                let thiss = this;
+                axios.post('/get_tags', {
+                    searchString: sel,
+                })
+                    .then(function (response){
+                        let tags = response.data;
+                        thiss.sugg = [];
+                        tags.forEach(function (item){
+                            if (!thiss.tagWritten(item)){
+                                thiss.sugg.push({text: item, state: 'dick'});
+                            }
+                        });
+                        //console.log(sug);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+
             addNewTag: function(){
 
                 for (let tag of this.post_tags){
-                    if ((this.nextTagTitle == tag.title) || (this.nextTagTitle.length == 0)) {
+                    if ((this.tagInput === tag.title) || (this.tagInput.length === 0)) {
                         return;
                     }
                 }
 
                 this.post_tags.push({
                     id: this.nextTagId++,
-                    title: this.nextTagTitle
+                    title: this.tagInput
                 });
-                this.nextTagTitle='';
+                this.tagInput='';
 
             },
 
@@ -99,7 +138,7 @@
 
             post_submit: function (event){
 //alert(this.post_title);
-                if (this.post_text.length == 0){
+                if (this.post_text.length === 0){
                     alert('rejected: text is emptou');
                     return;
                 }

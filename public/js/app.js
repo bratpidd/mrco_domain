@@ -46735,6 +46735,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'about',
@@ -46744,12 +46748,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             post_title: '',
             post_text: '',
             post_tags: [],
-            nextTagId: 1
+            nextTagId: 1,
+            tagInput: '',
+            sugg: []
         };
     },
 
 
     methods: {
+        tagWritten: function tagWritten(tag) {
+            var resp = false;
+            this.post_tags.forEach(function (item) {
+                if (tag === item.title) {
+                    //console.log('true!');
+                    resp = true;
+                }
+                //console.log(item.title);
+            });
+            return resp;
+        },
+
+        ACInputHandler: function ACInputHandler(event) {
+            var sel = this.tagInput = event;
+            var thiss = this;
+            axios.post('/get_tags', {
+                searchString: sel
+            }).then(function (response) {
+                var tags = response.data;
+                thiss.sugg = [];
+                tags.forEach(function (item) {
+                    if (!thiss.tagWritten(item)) {
+                        thiss.sugg.push({ text: item, state: 'dick' });
+                    }
+                });
+                //console.log(sug);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+
+
         addNewTag: function addNewTag() {
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
@@ -46760,7 +46798,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 for (var _iterator = this.post_tags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                     var tag = _step.value;
 
-                    if (this.nextTagTitle == tag.title || this.nextTagTitle.length == 0) {
+                    if (this.tagInput === tag.title || this.tagInput.length === 0) {
                         return;
                     }
                 }
@@ -46781,9 +46819,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.post_tags.push({
                 id: this.nextTagId++,
-                title: this.nextTagTitle
+                title: this.tagInput
             });
-            this.nextTagTitle = '';
+            this.tagInput = '';
         },
 
         removeTag: function removeTag(id) {
@@ -46792,7 +46830,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         post_submit: function post_submit(event) {
             //alert(this.post_title);
-            if (this.post_text.length == 0) {
+            if (this.post_text.length === 0) {
                 alert('rejected: text is emptou');
                 return;
             }
@@ -46938,49 +46976,26 @@ var render = function() {
                     [_vm._v("Tags")]
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.nextTagTitle,
-                          expression: "nextTagTitle"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "tags",
-                        type: "text",
-                        name: "tags",
-                        value: ""
-                      },
-                      domProps: { value: _vm.nextTagTitle },
-                      on: {
-                        keyup: function($event) {
-                          if (
-                            !("button" in $event) &&
-                            _vm._k(
-                              $event.keyCode,
-                              "enter",
-                              13,
-                              $event.key,
-                              "Enter"
-                            )
-                          ) {
-                            return null
-                          }
-                          return _vm.addNewTag($event)
+                  _c(
+                    "div",
+                    { staticClass: "col-md-8" },
+                    [
+                      _c("autocomplete", {
+                        attrs: {
+                          suggestions: _vm.sugg,
+                          value: _vm.tagInput,
+                          id: "tags"
                         },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.nextTagTitle = $event.target.value
+                        on: {
+                          input_AC: function($event) {
+                            _vm.ACInputHandler($event)
+                          },
+                          submit: _vm.addNewTag
                         }
-                      }
-                    })
-                  ])
+                      })
+                    ],
+                    1
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
@@ -47271,7 +47286,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47282,6 +47297,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -47335,14 +47352,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {
         matches: function matches() {
-            var _this = this;
-
-            return this.suggestions.filter(function (obj) {
-                return obj.text.toLowerCase().indexOf(_this.value.toLowerCase()) >= 0;
-            });
+            //return this.suggestions.filter((obj) => {
+            //  return obj.text.toLowerCase().indexOf(this.value.toLowerCase()) >= 0
+            //}
+            return this.suggestions;
         },
         openSuggestion: function openSuggestion() {
-            console.log(this.value);
+            //console.log(this.value)
             return this.value !== '' && this.matches.length !== 0 && this.open === true;
         }
     },
@@ -47372,7 +47388,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$emit('input_AC', value);
         },
         enter: function enter() {
-            this.$emit('input_AC', this.matches[this.current].text);
+            var TextToEmit = this.value;
+            var thiss = this;
+            if (thiss.matches[thiss.current] !== undefined) {
+                TextToEmit = this.matches[this.current].text;
+            }
+            this.$emit('input_AC', TextToEmit);
+            this.$emit('submit');
             this.open = false;
         },
         up: function up() {
@@ -47390,6 +47412,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         suggestionClick: function suggestionClick(index) {
             this.$emit('input_AC', this.matches[index].text);
+            this.$emit('submit');
             this.open = false;
         }
     }
@@ -47456,6 +47479,15 @@ var render = function() {
                 return null
               }
               return _vm.up($event)
+            },
+            function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "space", 32, $event.key, " ")
+              ) {
+                return null
+              }
+              _vm.$emit("key_space")
             }
           ]
         }

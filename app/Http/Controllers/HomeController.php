@@ -149,6 +149,7 @@ class HomeController extends Controller
         $tags = Tag::
         where('title', 'like', $searchString)
             ->select('title')
+            ->distinct()
             ->get()
             ->toArray();
         $tags_out = array();
