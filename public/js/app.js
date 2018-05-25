@@ -46307,7 +46307,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: 'hello',
     data: function data() {
         return {
-            msg: 'doomfistttttttttttttttt to Your Vue.js App',
+            msg: 'fistdoom to Your Vue.js App',
             users: [{ firstname: 'Sebastian', lastname: 'Eschweiler' }, { firstname: 'Bill', lastname: 'Smith' }, { firstname: 'John', lastname: 'Porter' }],
             input_val: '',
             login_link: false,
@@ -46787,7 +46787,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         post_submit: function post_submit(event) {
             //alert(this.post_title);
             if (this.post_text.length == 0) {
-                alert('rejected: text is emeptu');
+                alert('rejected: text is emptou');
                 return;
             }
 
