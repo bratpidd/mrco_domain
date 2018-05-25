@@ -46321,10 +46321,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         ACInputHandler: function ACInputHandler(event) {
             var sel = this.selection = event;
+            var thiss = this;
             axios.post('/get_tags', {
                 searchString: sel
             }).then(function (response) {
-                console.log(response.data);
+                var tags = response.data;
+                thiss.sugg = [];
+                tags.forEach(function (item, i, arr) {
+                    thiss.sugg.push({ text: item, state: 'dick' });
+                });
+                console.log(sug);
             }).catch(function (error) {
                 console.log(error);
             });

@@ -69,11 +69,17 @@
         methods: {
             ACInputHandler(event){
                 let sel = this.selection = event;
+                let thiss = this;
                 axios.post('/get_tags', {
                     searchString: sel,
                 })
                     .then(function (response){
-                        console.log(response.data);
+                        let tags = response.data;
+                        thiss.sugg = [];
+                        tags.forEach(function (item, i, arr){
+                            thiss.sugg.push({text: item, state: 'dick'});
+                        });
+                        console.log(sug);
                     })
                     .catch(function (error) {
                         console.log(error);
