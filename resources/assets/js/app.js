@@ -26,20 +26,14 @@ import hello from './components/Hello'
 import about from './components/about'
 import app from './components/app'
 import autocomplete from './components/Autocomplete'
+import tag_item from './components/tag_item'
 
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('hello', hello);
 Vue.component('about', about);
 Vue.component('app', app);
 Vue.component('autocomplete', autocomplete);
-
-Vue.component('tag-item', {
-    template:   '<div class="form-group paddy">' +
-                '<span class="label label-default span-margin">{{title}}<a href="javascript:void(0)" class="canceltag" v-on:click="$emit(\'nigger\')">🗙</a></span>' +
-                '</div>',
-    props: ['title']
-});
-
+Vue.component('tag_item', tag_item);
 
 const routes = [
     //route for the home route of the web page

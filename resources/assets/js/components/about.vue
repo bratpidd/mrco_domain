@@ -1,12 +1,12 @@
 <template>
 
     <div id="about" class="container">
-        <div class="row">
+        <div class="">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">New Post</div>
                     <div class="panel-body">
-                        <form v-on:submit.prevent id="formPost" class="form-horizontal" method="POST" action="">
+                        <form class="form-horizontal">
                             <div class="form-group">
                                 <label for="title" class="col-md-2 control-label">Title</label> <!--TITLE-->
 
@@ -27,37 +27,61 @@
                                 <label for="tags" class="col-md-2 control-label">Tags</label> <!--TAGS-->
 
                                 <div class="col-md-8">
-                                    <autocomplete :suggestions="sugg"  :value= "tagInput"
-                                                  @input_AC = "ACInputHandler($event)"
-                                                  @submit = "addNewTag"
-                                                  id = "tags"
+                                    <autocomplete :suggestions="AC_sugg"  :value= "tagInput"
+                                        @input_AC = "ACInputHandler($event)"
+                                        @submit = "addNewTag"
+                                        id = "tags"
                                     ></autocomplete>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                        <div class="col-md-offset-2 col-md-8 form-inline" >
-                                            <h3>
-                                                <tag-item
-                                                        v-for="(tag, index) in post_tags"
-                                                        v-bind:key="tag.id"
-                                                        v-bind:title="tag.title"
-                                                        v-on:nigger="removeTag(index)"
-                                                        >
-                                                </tag-item>
-                                            </h3>
-                                        </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-8 col-md-offset-2">
-                                    <button type="button" class="btn btn-primary" v-on:click="post_submit">
-                                        Submit
-                                    </button>
-                                </div>
-                            </div>
-
                         </form>
+
+
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-3">
+                                <label class="pull-right text-muted" for="suggested_tags">Suggested Tags:
+                                </label>
+                            </div>
+                            <div id="suggested_tags" class="col-md-6 form-inline paddy_zero">
+                                <tag_item
+                                        class="font_tag_sugg"
+                                        v-for = "(tag, index) in suggested_tags"
+                                        :title = "tag.title"
+                                        :key = "index"
+                                        label_class = "label-default"
+                                        @tag_add = "addSuggestedTag($event, index)">
+                                </tag_item>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 15px">
+                            <div class="col-md-2">
+                                <label class="pull-right padding-top-sm" for="accepted_tags">Your Tags:
+                                </label>
+                            </div>
+                            <div id="accepted_tags" class="col-md-8 form-inline paddy_zero margin-bottom-md">
+                                <tag_item
+                                        class="font_tag"
+                                        v-for = "(tag, index) in post_tags"
+                                        v-bind:key = "tag.id"
+                                        v-bind:title = "tag.title"
+                                        @tag_remove = "removeTag(index)"
+                                        label_class = "label-success"
+                                        :cross = true
+                                >
+                                </tag_item>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-1 col-md-offset-10">
+                                <button type="button" class="btn btn-primary" v-on:click="post_submit">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>
@@ -72,17 +96,43 @@
         name: 'about',
         data(){
             return {
+                suggested_tags: [],
+
                 nextTagTitle: '',
                 post_title:'',
                 post_text:'',
                 post_tags: [],
                 nextTagId: 1,
                 tagInput: '',
-                sugg: [],
+                AC_sugg: [],
             }
         },
 
         methods: {
+            requestSuggestedTags: function(){
+                let tags=[];
+                let thiss = this;
+                this.post_tags.forEach(function(item){
+                    tags.push(item.title);
+                });
+                console.log(tags);
+                axios.post('/suggested_tags', {
+                    tags: tags,
+                })
+                    .then(function(response){
+                        thiss.suggested_tags=[];
+                        let sug_tags = response.data;
+                        sug_tags.forEach(function(item){
+                            thiss.suggested_tags.push({title: item.title})
+                        });
+                        //console.log(sug_tags);
+                    })
+                    .catch(function (error) {
+                    console.log(error);
+                });
+
+            },
+
             tagWritten: function (tag) {
                 let resp = false;
                 this.post_tags.forEach(function (item) {
@@ -103,10 +153,10 @@
                 })
                     .then(function (response){
                         let tags = response.data;
-                        thiss.sugg = [];
+                        thiss.AC_sugg = [];
                         tags.forEach(function (item){
                             if (!thiss.tagWritten(item)){
-                                thiss.sugg.push({text: item, state: 'dick'});
+                                thiss.AC_sugg.push({text: item, state: 'dick'});
                             }
                         });
                         //console.log(sug);
@@ -114,6 +164,15 @@
                     .catch(function (error) {
                         console.log(error);
                     });
+            },
+
+            addSuggestedTag(event, id){
+                this.post_tags.push({
+                    id: this.nextTagId++,
+                    title: event
+                });
+                this.requestSuggestedTags();
+                //alert (event);
             },
 
             addNewTag: function(){
@@ -129,11 +188,13 @@
                     title: this.tagInput
                 });
                 this.tagInput='';
+                this.requestSuggestedTags();
 
             },
 
             removeTag: function(id){
                 this.post_tags.splice(id, 1);
+                this.requestSuggestedTags();
             },
 
             post_submit: function (event){

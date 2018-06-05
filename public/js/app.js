@@ -1382,7 +1382,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);
-module.exports = __webpack_require__(68);
+module.exports = __webpack_require__(73);
 
 
 /***/ }),
@@ -1400,6 +1400,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_app___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_app__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Autocomplete__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Autocomplete___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Autocomplete__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_tag_item__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_tag_item___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_tag_item__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -1425,16 +1427,13 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
 
 
 
-Vue.component('example', __webpack_require__(63));
+
+Vue.component('example', __webpack_require__(68));
 Vue.component('hello', __WEBPACK_IMPORTED_MODULE_1__components_Hello___default.a);
 Vue.component('about', __WEBPACK_IMPORTED_MODULE_2__components_about___default.a);
 Vue.component('app', __WEBPACK_IMPORTED_MODULE_3__components_app___default.a);
 Vue.component('autocomplete', __WEBPACK_IMPORTED_MODULE_4__components_Autocomplete___default.a);
-
-Vue.component('tag-item', {
-    template: '<div class="form-group paddy">' + '<span class="label label-default span-margin">{{title}}<a href="javascript:void(0)" class="canceltag" v-on:click="$emit(\'nigger\')">🗙</a></span>' + '</div>',
-    props: ['title']
-});
+Vue.component('tag_item', __WEBPACK_IMPORTED_MODULE_5__components_tag_item___default.a);
 
 var routes = [
 //route for the home route of the web page
@@ -46739,23 +46738,70 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'about',
     data: function data() {
         return {
+            suggested_tags: [],
+
             nextTagTitle: '',
             post_title: '',
             post_text: '',
             post_tags: [],
             nextTagId: 1,
             tagInput: '',
-            sugg: []
+            AC_sugg: []
         };
     },
 
 
     methods: {
+        requestSuggestedTags: function requestSuggestedTags() {
+            var tags = [];
+            var thiss = this;
+            this.post_tags.forEach(function (item) {
+                tags.push(item.title);
+            });
+            console.log(tags);
+            axios.post('/suggested_tags', {
+                tags: tags
+            }).then(function (response) {
+                thiss.suggested_tags = [];
+                var sug_tags = response.data;
+                sug_tags.forEach(function (item) {
+                    thiss.suggested_tags.push({ title: item.title });
+                });
+                //console.log(sug_tags);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+
         tagWritten: function tagWritten(tag) {
             var resp = false;
             this.post_tags.forEach(function (item) {
@@ -46775,16 +46821,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 searchString: sel
             }).then(function (response) {
                 var tags = response.data;
-                thiss.sugg = [];
+                thiss.AC_sugg = [];
                 tags.forEach(function (item) {
                     if (!thiss.tagWritten(item)) {
-                        thiss.sugg.push({ text: item, state: 'dick' });
+                        thiss.AC_sugg.push({ text: item, state: 'dick' });
                     }
                 });
                 //console.log(sug);
             }).catch(function (error) {
                 console.log(error);
             });
+        },
+        addSuggestedTag: function addSuggestedTag(event, id) {
+            this.post_tags.push({
+                id: this.nextTagId++,
+                title: event
+            });
+            this.requestSuggestedTags();
+            //alert (event);
         },
 
 
@@ -46822,10 +46876,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 title: this.tagInput
             });
             this.tagInput = '';
+            this.requestSuggestedTags();
         },
 
         removeTag: function removeTag(id) {
             this.post_tags.splice(id, 1);
+            this.requestSuggestedTags();
         },
 
         post_submit: function post_submit(event) {
@@ -46867,186 +46923,241 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container", attrs: { id: "about" } }, [
-    _c("div", { staticClass: "row" }, [
+    _c("div", {}, [
       _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
         _c("div", { staticClass: "panel panel-default" }, [
           _c("div", { staticClass: "panel-heading" }, [_vm._v("New Post")]),
           _vm._v(" "),
           _c("div", { staticClass: "panel-body" }, [
-            _c(
-              "form",
-              {
-                staticClass: "form-horizontal",
-                attrs: { id: "formPost", method: "POST", action: "" },
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                  }
-                }
-              },
-              [
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-md-2 control-label",
-                      attrs: { for: "title" }
-                    },
-                    [_vm._v("Title")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.post_title,
-                          expression: "post_title"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "title",
-                        type: "text",
-                        name: "title",
-                        value: "",
-                        required: ""
-                      },
-                      domProps: { value: _vm.post_title },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.post_title = $event.target.value
-                        }
-                      }
-                    })
-                  ])
-                ]),
+            _c("form", { staticClass: "form-horizontal" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "title" }
+                  },
+                  [_vm._v("Title")]
+                ),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-md-2 control-label",
-                      attrs: { for: "content" }
-                    },
-                    [_vm._v("Text")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.post_text,
-                          expression: "post_text"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "content",
-                        name: "content",
-                        rows: "5",
-                        required: ""
-                      },
-                      domProps: { value: _vm.post_text },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.post_text = $event.target.value
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-md-2 control-label",
-                      attrs: { for: "tags" }
-                    },
-                    [_vm._v("Tags")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-8" },
-                    [
-                      _c("autocomplete", {
-                        attrs: {
-                          suggestions: _vm.sugg,
-                          value: _vm.tagInput,
-                          id: "tags"
-                        },
-                        on: {
-                          input_AC: function($event) {
-                            _vm.ACInputHandler($event)
-                          },
-                          submit: _vm.addNewTag
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col-md-offset-2 col-md-8 form-inline" },
-                    [
-                      _c(
-                        "h3",
-                        _vm._l(_vm.post_tags, function(tag, index) {
-                          return _c("tag-item", {
-                            key: tag.id,
-                            attrs: { title: tag.title },
-                            on: {
-                              nigger: function($event) {
-                                _vm.removeTag(index)
-                              }
-                            }
-                          })
-                        })
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
-                    _c(
-                      "button",
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c("input", {
+                    directives: [
                       {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "button" },
-                        on: { click: _vm.post_submit }
-                      },
-                      [
-                        _vm._v(
-                          "\n                                    Submit\n                                "
-                        )
-                      ]
-                    )
-                  ])
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.post_title,
+                        expression: "post_title"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "title",
+                      type: "text",
+                      name: "title",
+                      value: "",
+                      required: ""
+                    },
+                    domProps: { value: _vm.post_title },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.post_title = $event.target.value
+                      }
+                    }
+                  })
                 ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "content" }
+                  },
+                  [_vm._v("Text")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.post_text,
+                        expression: "post_text"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "content",
+                      name: "content",
+                      rows: "5",
+                      required: ""
+                    },
+                    domProps: { value: _vm.post_text },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.post_text = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "tags" }
+                  },
+                  [_vm._v("Tags")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-md-8" },
+                  [
+                    _c("autocomplete", {
+                      attrs: {
+                        suggestions: _vm.AC_sugg,
+                        value: _vm.tagInput,
+                        id: "tags"
+                      },
+                      on: {
+                        input_AC: function($event) {
+                          _vm.ACInputHandler($event)
+                        },
+                        submit: _vm.addNewTag
+                      }
+                    })
+                  ],
+                  1
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-1" }),
+              _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-6 form-inline paddy_zero",
+                  attrs: { id: "suggested_tags" }
+                },
+                _vm._l(_vm.suggested_tags, function(tag, index) {
+                  return _c("tag_item", {
+                    key: index,
+                    staticClass: "font_tag_sugg",
+                    attrs: { title: tag.title, label_class: "label-default" },
+                    on: {
+                      tag_add: function($event) {
+                        _vm.addSuggestedTag($event, index)
+                      }
+                    }
+                  })
+                })
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "row", staticStyle: { "margin-top": "15px" } },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "col-md-8 form-inline paddy_zero margin-bottom-md",
+                    attrs: { id: "accepted_tags" }
+                  },
+                  _vm._l(_vm.post_tags, function(tag, index) {
+                    return _c("tag_item", {
+                      key: tag.id,
+                      staticClass: "font_tag",
+                      attrs: {
+                        title: tag.title,
+                        label_class: "label-success",
+                        cross: true
+                      },
+                      on: {
+                        tag_remove: function($event) {
+                          _vm.removeTag(index)
+                        }
+                      }
+                    })
+                  })
+                )
               ]
-            )
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-1 col-md-offset-10" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.post_submit }
+                  },
+                  [
+                    _vm._v(
+                      "\n                                Submit\n                            "
+                    )
+                  ]
+                )
+              ])
+            ])
           ])
         ])
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3" }, [
+      _c(
+        "label",
+        {
+          staticClass: "pull-right text-muted",
+          attrs: { for: "suggested_tags" }
+        },
+        [_vm._v("Suggested Tags:\n                            ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-2" }, [
+      _c(
+        "label",
+        {
+          staticClass: "pull-right padding-top-sm",
+          attrs: { for: "accepted_tags" }
+        },
+        [_vm._v("Your Tags:\n                            ")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -47559,6 +47670,199 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
+var __vue_scopeId__ = "data-v-5c013daf"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/tag_item.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5c013daf", Component.options)
+  } else {
+    hotAPI.reload("data-v-5c013daf", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(65);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("b7cc5b52", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5c013daf\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./tag_item.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5c013daf\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./tag_item.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 66 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "tag_item",
+    props: {
+        title: {
+            type: String,
+            required: true
+        },
+        label_class: {
+            type: String,
+            required: true
+        },
+        cross: {
+            type: Boolean
+        }
+    }
+});
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.cross
+    ? _c("div", { staticClass: "form-group paddy_tags" }, [
+        _c(
+          "span",
+          { staticClass: "label span-margin", class: _vm.label_class },
+          [
+            _vm._v(_vm._s(_vm.title) + "\n        "),
+            _c(
+              "a",
+              {
+                staticClass: "canceltag",
+                attrs: { href: "javascript:void(0)" },
+                on: {
+                  click: function($event) {
+                    _vm.$emit("tag_remove")
+                  }
+                }
+              },
+              [_vm._v("🗙\n        ")]
+            )
+          ]
+        )
+      ])
+    : _c("div", { staticClass: "form-group paddy_tags_sugg" }, [
+        _c(
+          "a",
+          {
+            attrs: { href: "javascript:void(0)" },
+            on: {
+              click: function($event) {
+                _vm.$emit("tag_add", _vm.title)
+              }
+            }
+          },
+          [
+            _c(
+              "span",
+              { staticClass: "label span-margin", class: _vm.label_class },
+              [_vm._v(_vm._s(_vm.title) + "\n        ")]
+            )
+          ]
+        )
+      ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5c013daf", module.exports)
+  }
+}
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(69)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(71)
+/* template */
+var __vue_template__ = __webpack_require__(72)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
@@ -47592,13 +47896,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 64 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(65);
+var content = __webpack_require__(70);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -47618,7 +47922,7 @@ if(false) {
 }
 
 /***/ }),
-/* 65 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -47632,7 +47936,7 @@ exports.push([module.i, "\n#app {\n    font-family: 'Avenir', Helvetica, Arial, 
 
 
 /***/ }),
-/* 66 */
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -47646,7 +47950,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 67 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -47666,7 +47970,7 @@ if (false) {
 }
 
 /***/ }),
-/* 68 */
+/* 73 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

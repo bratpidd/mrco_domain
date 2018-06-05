@@ -40,3 +40,4 @@ Route::post('/vue_newpost', 'HomeController@vue_newpost')->name('vue_newpost');
 Route::post('/test_post', 'HomeController@test_post')->name('test_post');
 
 Route::post('/get_tags', 'HomeController@get_tags')->name('get_tags');
+Route::post('/suggested_tags','HomeController@suggested_tags')->name('suggested_tags');

@@ -7,6 +7,7 @@ use App\Tag;
 use App\Subscription;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -159,5 +160,32 @@ class HomeController extends Controller
         }
         $response = $tags_out;
         return $response;
+    }
+
+    public function suggested_tags(Request $request){
+        $input_tags = $request->get('tags');
+        $suggest = DB::table('tags as t0')
+            ->selectRaw('t1.title, count(t1.title) AS cnt')
+            ->whereIn('t0.title', $input_tags)
+            ->join('tags AS t1','t0.post_id', '=', 't1.post_id')
+            ->whereNotIn('t1.title', $input_tags)
+            ->groupBy('t1.title')
+            ->orderByDesc('cnt')
+            ->limit(6)
+            ->get()
+            ->toArray();
+
+        return $suggest;
+
+
+        //SELECT pt1.tag_name, COUNT(pt1.tag_name) AS cnt
+//FROM post_tags pt0
+//JOIN post_tags pt1 ON pt0.post_id = pt1.post_id AND pt1.tag_name NOT IN ('dick')
+//WHERE pt0.tag_name IN ('dick')
+//GROUP BY pt1.tag_name
+//ORDER BY cnt DESC
+//LIMIT 999
+
+
     }
 }
