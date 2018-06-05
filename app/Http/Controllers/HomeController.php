@@ -172,7 +172,7 @@ class HomeController extends Controller
             ->whereNotIn('t1.title', $input_tags)
             ->groupBy('t1.title')
             ->orderByDesc('cnt')
-            ->limit(6)
+            ->limit(10)
             ->get()
             ->toArray();
 
