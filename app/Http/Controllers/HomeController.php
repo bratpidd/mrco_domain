@@ -147,6 +147,7 @@ class HomeController extends Controller
     public function get_tags(Request $request){
         $response = 'suck my dick';
         $searchString = $request->get('searchString').'%';
+        if ($searchString === '%'){return [];}
         $tags = Tag::
         where('title', 'like', $searchString)
             ->select('title')
