@@ -23,7 +23,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group row">
                                 <label for="tags" class="col-md-2 control-label">Tags</label> <!--TAGS-->
 
                                 <div class="col-md-3">
@@ -32,6 +32,11 @@
                                         @submit = "addNewTag"
                                         id = "tags"
                                     ></autocomplete>
+                                </div>
+                                <div class="col-md-5">
+                                    <button type="button" class="btn btn-primary pull-right" v-on:click="post_submit">
+                                        Submit New Post!
+                                    </button>
                                 </div>
 
                             </div>
@@ -75,7 +80,7 @@
                                 </label>
                             </div>
 
-                            <div id="suggested_tags" class="col-md-6 form-inline paddy_zero">
+                            <div id="suggested_tags" class=" form-inline paddy_zero">
                                 <tag_item
                                         class="font_tag_sugg paddy_tags_sugg"
                                         v-for = "(tag, index) in suggested_tags"
@@ -84,14 +89,6 @@
                                         label_class = "label-default"
                                         @tag_add = "addSuggestedTag($event, index)">
                                 </tag_item>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-1 col-md-offset-10">
-                                <button type="button" class="btn btn-primary" v-on:click="post_submit">
-                                    Submit
-                                </button>
                             </div>
                         </div>
 

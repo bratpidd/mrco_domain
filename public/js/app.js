@@ -46770,9 +46770,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'about',
@@ -47022,7 +47019,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "form-group row" }, [
                 _c(
                   "label",
                   {
@@ -47051,7 +47048,23 @@ var render = function() {
                     })
                   ],
                   1
-                )
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-5" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary pull-right",
+                      attrs: { type: "button" },
+                      on: { click: _vm.post_submit }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                    Submit New Post!\n                                "
+                      )
+                    ]
+                  )
+                ])
               ])
             ]),
             _vm._v(" "),
@@ -47130,7 +47143,7 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "col-md-6 form-inline paddy_zero",
+                  staticClass: " form-inline paddy_zero",
                   attrs: { id: "suggested_tags" }
                 },
                 _vm._l(_vm.suggested_tags, function(tag, index) {
@@ -47146,24 +47159,6 @@ var render = function() {
                   })
                 })
               )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-1 col-md-offset-10" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button" },
-                    on: { click: _vm.post_submit }
-                  },
-                  [
-                    _vm._v(
-                      "\n                                Submit\n                            "
-                    )
-                  ]
-                )
-              ])
             ])
           ])
         ])
