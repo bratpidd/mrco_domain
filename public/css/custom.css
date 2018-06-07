@@ -48,12 +48,24 @@
     padding-top: 10px;
 }
 
+.paddy_tags a:hover{
+    text-decoration: none;
+}
+.paddy_tags a{
+     text-decoration: none;
+ }
 .paddy_tags_sugg{
     padding-bottom: 10px;
     padding-right: 5px;
     padding-left: 5px;
     padding-top: 5px;
 }
+.paddy_tags_sugg a{
+    text-decoration: none;
+}
+.paddy_tags_sugg a:hover{
+     text-decoration: none;
+ }
 
 .paddy_zero{
     padding: 0!important;

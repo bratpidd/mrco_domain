@@ -7,9 +7,9 @@
                     <div class="panel-heading">New Post</div>
                     <div class="panel-body">
                         <form class="form-horizontal">
+
                             <div class="form-group">
                                 <label for="title" class="col-md-2 control-label">Title</label> <!--TITLE-->
-
                                 <div class="col-md-8">
                                     <input v-model="post_title" id="title" type="text" class="form-control" name="title" value="" required>
                                 </div>
@@ -26,43 +26,28 @@
                             <div class="form-group">
                                 <label for="tags" class="col-md-2 control-label">Tags</label> <!--TAGS-->
 
-                                <div class="col-md-8">
+                                <div class="col-md-3">
                                     <autocomplete :suggestions="AC_sugg"  :value= "tagInput"
                                         @input_AC = "ACInputHandler($event)"
                                         @submit = "addNewTag"
                                         id = "tags"
                                     ></autocomplete>
                                 </div>
+
                             </div>
+
                         </form>
 
-
-                        <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-3">
-                                <label class="pull-right text-muted" for="suggested_tags">Suggested Tags:
-                                </label>
-                            </div>
-                            <div id="suggested_tags" class="col-md-6 form-inline paddy_zero">
-                                <tag_item
-                                        class="font_tag_sugg"
-                                        v-for = "(tag, index) in suggested_tags"
-                                        :title = "tag.title"
-                                        :key = "index"
-                                        label_class = "label-default"
-                                        @tag_add = "addSuggestedTag($event, index)">
-                                </tag_item>
-                            </div>
-                        </div>
-
                         <div class="row" style="margin-top: 15px">
+
                             <div class="col-md-2">
-                                <label class="pull-right padding-top-sm" for="accepted_tags">Your Tags:
+                                <label v-if="false" class="pull-right padding-top-sm" for="accepted_tags">Your Tags:
                                 </label>
                             </div>
+
                             <div id="accepted_tags" class="col-md-8 form-inline paddy_zero margin-bottom-md">
                                 <tag_item
-                                        class="font_tag"
+                                        class="font_tag paddy_tags"
                                         v-for = "(tag, index) in post_tags"
                                         v-bind:key = "tag.id"
                                         v-bind:title = "tag.title"
@@ -70,6 +55,34 @@
                                         label_class = "label-success"
                                         :cross = true
                                 >
+                                </tag_item>
+                                <tag_item
+                                        class="font_tag paddy_tags"
+                                        v-if = "post_tags.length === 0"
+                                        label_class = "label-info"
+                                        title = "No tags so far"
+                                        :cross = false
+                                >
+                                </tag_item>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <label v-if="suggested_tags.length !== 0" class="pull-right text-muted" for="suggested_tags">Suggested Tags:
+                                </label>
+                            </div>
+
+                            <div id="suggested_tags" class="col-md-6 form-inline paddy_zero">
+                                <tag_item
+                                        class="font_tag_sugg paddy_tags_sugg"
+                                        v-for = "(tag, index) in suggested_tags"
+                                        :title = "tag.title"
+                                        :key = "index"
+                                        label_class = "label-default"
+                                        @tag_add = "addSuggestedTag($event, index)">
                                 </tag_item>
                             </div>
                         </div>
@@ -82,13 +95,11 @@
                             </div>
                         </div>
 
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -235,7 +246,7 @@
 
 <style scoped>
     #about {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        font-family: 'Raleway', 'sans-serif';
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: left;

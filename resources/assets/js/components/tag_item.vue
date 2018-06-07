@@ -1,12 +1,12 @@
 <template>
-    <div v-if="cross"  class="form-group paddy_tags">
+    <div v-if="cross"  class="form-group">
         <span class="label span-margin" :class="label_class">{{title}}
             <a href="javascript:void(0)" class="canceltag" v-on:click="$emit('tag_remove')">🗙
             </a>
         </span>
     </div>
 
-    <div v-else class="form-group paddy_tags_sugg">
+    <div v-else class="form-group">
         <a href = "javascript:void(0)" @click = "$emit('tag_add', title)">
             <span class="label span-margin" :class="label_class">{{title}}
             </span>

@@ -46658,7 +46658,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n#about[data-v-ffce04f4] {\n    font-family: 'Avenir', Helvetica, Arial, sans-serif;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    text-align: left;\n    /*color: #2c3e50;*/\n    /*margin-top: 60px;*/\n}\n\n", ""]);
+exports.push([module.i, "\n#about[data-v-ffce04f4] {\n    font-family: 'Raleway', 'sans-serif';\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    text-align: left;\n    /*color: #2c3e50;*/\n    /*margin-top: 60px;*/\n}\n\n", ""]);
 
 // exports
 
@@ -46669,6 +46669,17 @@ exports.push([module.i, "\n#about[data-v-ffce04f4] {\n    font-family: 'Avenir',
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -47023,7 +47034,7 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "col-md-8" },
+                  { staticClass: "col-md-3" },
                   [
                     _c("autocomplete", {
                       attrs: {
@@ -47044,10 +47055,77 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "row", staticStyle: { "margin-top": "15px" } },
+              [
+                _c("div", { staticClass: "col-md-2" }, [
+                  false
+                    ? _c(
+                        "label",
+                        {
+                          staticClass: "pull-right padding-top-sm",
+                          attrs: { for: "accepted_tags" }
+                        },
+                        [_vm._v("Your Tags:\n                            ")]
+                      )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "col-md-8 form-inline paddy_zero margin-bottom-md",
+                    attrs: { id: "accepted_tags" }
+                  },
+                  [
+                    _vm._l(_vm.post_tags, function(tag, index) {
+                      return _c("tag_item", {
+                        key: tag.id,
+                        staticClass: "font_tag paddy_tags",
+                        attrs: {
+                          title: tag.title,
+                          label_class: "label-success",
+                          cross: true
+                        },
+                        on: {
+                          tag_remove: function($event) {
+                            _vm.removeTag(index)
+                          }
+                        }
+                      })
+                    }),
+                    _vm._v(" "),
+                    _vm.post_tags.length === 0
+                      ? _c("tag_item", {
+                          staticClass: "font_tag paddy_tags",
+                          attrs: {
+                            label_class: "label-info",
+                            title: "No tags so far",
+                            cross: false
+                          }
+                        })
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ]
+            ),
+            _vm._v(" "),
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-1" }),
-              _vm._v(" "),
-              _vm._m(0),
+              _c("div", { staticClass: "col-md-3" }, [
+                _vm.suggested_tags.length !== 0
+                  ? _c(
+                      "label",
+                      {
+                        staticClass: "pull-right text-muted",
+                        attrs: { for: "suggested_tags" }
+                      },
+                      [_vm._v("Suggested Tags:\n                            ")]
+                    )
+                  : _vm._e()
+              ]),
               _vm._v(" "),
               _c(
                 "div",
@@ -47058,7 +47136,7 @@ var render = function() {
                 _vm._l(_vm.suggested_tags, function(tag, index) {
                   return _c("tag_item", {
                     key: index,
-                    staticClass: "font_tag_sugg",
+                    staticClass: "font_tag_sugg paddy_tags_sugg",
                     attrs: { title: tag.title, label_class: "label-default" },
                     on: {
                       tag_add: function($event) {
@@ -47069,39 +47147,6 @@ var render = function() {
                 })
               )
             ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "row", staticStyle: { "margin-top": "15px" } },
-              [
-                _vm._m(1),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "col-md-8 form-inline paddy_zero margin-bottom-md",
-                    attrs: { id: "accepted_tags" }
-                  },
-                  _vm._l(_vm.post_tags, function(tag, index) {
-                    return _c("tag_item", {
-                      key: tag.id,
-                      staticClass: "font_tag",
-                      attrs: {
-                        title: tag.title,
-                        label_class: "label-success",
-                        cross: true
-                      },
-                      on: {
-                        tag_remove: function($event) {
-                          _vm.removeTag(index)
-                        }
-                      }
-                    })
-                  })
-                )
-              ]
-            ),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-md-1 col-md-offset-10" }, [
@@ -47126,38 +47171,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3" }, [
-      _c(
-        "label",
-        {
-          staticClass: "pull-right text-muted",
-          attrs: { for: "suggested_tags" }
-        },
-        [_vm._v("Suggested Tags:\n                            ")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-2" }, [
-      _c(
-        "label",
-        {
-          staticClass: "pull-right padding-top-sm",
-          attrs: { for: "accepted_tags" }
-        },
-        [_vm._v("Your Tags:\n                            ")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -47253,7 +47267,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n#app {\n    font-family: 'Avenir', Helvetica, Arial, sans-serif;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    text-align: center;\n    color: #2c3e50;\n    margin-top: 60px;\n}\n\n", ""]);
+exports.push([module.i, "\n#app {\n    font-family: 'Raleway', 'sans-serif';\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    text-align: center;\n    color: #2c3e50;\n    margin-top: 60px;\n}\n\n", ""]);
 
 // exports
 
@@ -47264,6 +47278,7 @@ exports.push([module.i, "\n#app {\n    font-family: 'Avenir', Helvetica, Arial, 
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -47290,6 +47305,8 @@ var render = function() {
     "div",
     { attrs: { id: "app" } },
     [
+      _c("a", { attrs: { href: "/" } }, [_vm._v("Home (no bullshit)")]),
+      _vm._v(" "),
       _c("router-link", { attrs: { to: "/vue_retarded" } }, [_vm._v("Home")]),
       _vm._v(" "),
       _c("router-link", { attrs: { to: "/vue_retarded/about" } }, [
@@ -47791,7 +47808,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.cross
-    ? _c("div", { staticClass: "form-group paddy_tags" }, [
+    ? _c("div", { staticClass: "form-group" }, [
         _c(
           "span",
           { staticClass: "label span-margin", class: _vm.label_class },
@@ -47813,7 +47830,7 @@ var render = function() {
           ]
         )
       ])
-    : _c("div", { staticClass: "form-group paddy_tags_sugg" }, [
+    : _c("div", { staticClass: "form-group" }, [
         _c(
           "a",
           {

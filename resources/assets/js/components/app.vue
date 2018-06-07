@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <a href="/">Home (no bullshit)</a>
         <router-link v-bind:to="'/vue_retarded'">Home</router-link>
         <router-link v-bind:to="'/vue_retarded/about'">About</router-link>
         <!-- the router outlet, where all matched components would ber viewed -->
@@ -14,8 +15,9 @@
 </script>
 <!-- styling for the component -->
 <style>
+
     #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        font-family: 'Raleway', 'sans-serif';
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
