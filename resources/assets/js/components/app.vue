@@ -1,7 +1,8 @@
 <template>
     <div id="app">
-        <a href="/">Home (no bullshit)</a>
-        <router-link v-bind:to="'/vue_retarded'">Home</router-link>
+        <a href="/">Home</a>
+        <!--router-link v-bind:to="'/vue_retarded'">Home (Bullshit)</router-link>
+        -->
         <router-link v-bind:to="'/vue_retarded/about'">About</router-link>
         <!-- the router outlet, where all matched components would ber viewed -->
         <router-view></router-view>
