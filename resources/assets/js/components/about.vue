@@ -164,7 +164,7 @@
                         thiss.AC_sugg = [];
                         tags.forEach(function (item){
                             if (!thiss.tagWritten(item)){
-                                thiss.AC_sugg.push({text: item, state: 'dick'});
+                                thiss.AC_sugg.push({text: item, state: ''});
                             }
                         });
                         //console.log(sug);
