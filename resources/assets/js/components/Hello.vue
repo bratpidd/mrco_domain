@@ -77,7 +77,7 @@
                         let tags = response.data;
                         thiss.sugg = [];
                         tags.forEach(function (item, i, arr){
-                            thiss.sugg.push({text: item, state: 'dick'});
+                            thiss.sugg.push({text: item, state: ''});
                         });
                         console.log(sug);
                     })

@@ -47944,7 +47944,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var tags = response.data;
                 thiss.sugg = [];
                 tags.forEach(function (item, i, arr) {
-                    thiss.sugg.push({ text: item, state: 'dick' });
+                    thiss.sugg.push({ text: item, state: '' });
                 });
                 console.log(sug);
             }).catch(function (error) {
