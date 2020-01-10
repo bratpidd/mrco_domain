@@ -48902,6 +48902,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'app'
@@ -48919,9 +48920,7 @@ var render = function() {
     "div",
     { attrs: { id: "app" } },
     [
-      _c("a", { attrs: { href: "/" } }, [_vm._v("Home (no bullshit)")]),
-      _vm._v(" "),
-      _c("router-link", { attrs: { to: "/vue_retarded" } }, [_vm._v("Home")]),
+      _c("a", { attrs: { href: "/" } }, [_vm._v("Home")]),
       _vm._v(" "),
       _c("router-link", { attrs: { to: "/vue_retarded/about" } }, [
         _vm._v("About")
