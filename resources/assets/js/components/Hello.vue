@@ -45,7 +45,7 @@
         name: 'hello',
         data () {
             return {
-                msg: 'PIDORR to Your Vue.js App',
+                msg: 'Welcome to Your Vue.js App',
                 users: [
                     {firstname: 'Sebastian', lastname: 'Eschweiler'},
                     {firstname: 'Bill', lastname: 'Smith'},
