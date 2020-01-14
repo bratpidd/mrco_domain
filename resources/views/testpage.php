@@ -11,6 +11,7 @@ echo '$var';
 echo $var;
 echo("$var");
 print($var);
-sleep(3);
-echo '<script>alert("script completed")</script>';
 ?>
+<script>setTimeout(function () {
+    alert();
+}, 3000);</script>
