@@ -42,4 +42,4 @@ Route::post('/test_post', 'HomeController@test_post')->name('test_post');
 Route::post('/get_tags', 'HomeController@get_tags')->name('get_tags');
 Route::post('/suggested_tags','HomeController@suggested_tags')->name('suggested_tags');
 
-Route::get('/testpage', 'HomeController@vue_test')->name('testpage'); //self explanatory
+Route::get('/testpage', 'HomeController@testpage')->name('testpage'); //self explanatory
