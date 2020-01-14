@@ -20,7 +20,6 @@ class Post extends Model
         foreach ($tags as $key=> $value){
             $tags_array[] = $value['title'];
         }
-        //$tags_array[]='zaga';
         return $tags_array;
     }
 

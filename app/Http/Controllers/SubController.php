@@ -38,19 +38,6 @@ class SubController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-      /*  $posts = DB::table('posts')
-            ->join('subscriptions', function($join)
-            {
-                $user_id = Auth::user()->id;
-                $join->on('posts.user_id', '=', 'subscriptions.author_id')->where('subscriptions.user_id', '=', $user_id);
-            }
-            )
-            ->join('users', 'posts.user_id', '=', 'users.id')
-            //->leftJoin('comments', 'comments.post_id', '=', 'posts.id')
-            ->orderBy('posts.updated_at', 'desc')
-            ->get();
-*/
-
         //print_r(implode($subs2));
         //dd($posts);
         return view('subs', [

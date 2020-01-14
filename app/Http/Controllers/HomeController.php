@@ -92,11 +92,7 @@ class HomeController extends Controller
                 $tag->post_id = $lastPostID;
                 $tag->save();
             }
-            $response='yёr post addad successfully';
-            //$lastPostTags = Post::with('tags')->latest()->first();
-            //$response = Post::latest()->first()->tags_array();
-            //$response = $lastPostID;
-            //$response = $tags[0]['title'] ?? 'zaga';
+            $response='Post added successfully';
             return $response;
         }
         else
@@ -177,16 +173,6 @@ class HomeController extends Controller
             ->toArray();
 
         return $suggest;
-
-
-        //SELECT pt1.tag_name, COUNT(pt1.tag_name) AS cnt
-//FROM post_tags pt0
-//JOIN post_tags pt1 ON pt0.post_id = pt1.post_id AND pt1.tag_name NOT IN ('dick')
-//WHERE pt0.tag_name IN ('dick')
-//GROUP BY pt1.tag_name
-//ORDER BY cnt DESC
-//LIMIT 999
-
 
     }
 }
