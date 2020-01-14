@@ -1643,7 +1643,7 @@ var routes = [
 //route for the home route of the web page
 { path: '/vue_retarded', component: __WEBPACK_IMPORTED_MODULE_1__components_Hello___default.a },
 //route for the about route of the web page
-{ path: '/vue_retarded/about', component: __WEBPACK_IMPORTED_MODULE_2__components_about___default.a }];
+{ path: '/vue_retarded/about', component: __WEBPACK_IMPORTED_MODULE_2__components_about___default.a }, { path: '/testpage', component: __WEBPACK_IMPORTED_MODULE_1__components_Hello___default.a }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     routes: routes, // short for routes: routes
