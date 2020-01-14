@@ -175,4 +175,8 @@ class HomeController extends Controller
         return $suggest;
 
     }
+
+    public function test() {
+
+    }
 }
