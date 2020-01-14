@@ -135,7 +135,7 @@ class HomeController extends Controller
 
     public function testpage()
     {
-        return view('vue_test');
+        return view('testpage');
     }
 
     public function test_post(Request $request)
