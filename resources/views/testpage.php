@@ -39,4 +39,14 @@ function noIvanov($array){
     return $response;
 }
 print_r(noIvanov($ar));
+function foo() {
+    static $count = 4;
+    return ++$count;
+}
+print foo();
+print foo();
+print foo();
+
+
+
 ?>
