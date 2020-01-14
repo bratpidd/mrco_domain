@@ -141,7 +141,7 @@ class HomeController extends Controller
     }
 
     public function get_tags(Request $request){
-        $response = 'suck my dick';
+        $response = '-';
         $searchString = $request->get('searchString').'%';
         if ($searchString === '%'){return [];}
         $tags = Tag::
