@@ -176,7 +176,7 @@ class HomeController extends Controller
 
     }
 
-    public function test() {
+    public function testpage() {
         return view('test');
     }
 }
