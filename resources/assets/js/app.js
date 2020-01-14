@@ -39,7 +39,9 @@ const routes = [
     //route for the home route of the web page
     { path: '/vue_retarded', component: hello },
 //route for the about route of the web page
-    { path: '/vue_retarded/about', component: about }
+    { path: '/vue_retarded/about', component: about },
+
+    { path: '/testpage', component: hello }
 ];
 
 const router = new VueRouter({
