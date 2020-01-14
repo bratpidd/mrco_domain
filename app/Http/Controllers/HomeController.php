@@ -177,6 +177,6 @@ class HomeController extends Controller
     }
 
     public function testpage() {
-        return view('test');
+        return view('testpage');
     }
 }
