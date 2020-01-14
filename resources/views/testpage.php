@@ -30,5 +30,5 @@ function noIvanov($array){
     }
     return $response;
 }
-echo (noIvanov($ar));
+print_r(noIvanov($ar));
 ?>
