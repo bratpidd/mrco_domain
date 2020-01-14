@@ -18,6 +18,14 @@ $ar = array(
         'name' => 'Иванов',
         'specialty' => 'хирург'
     ),
+    array(
+        'name' => 'Ивонов',
+        'specialty' => 'хирург'
+    ),
+    array(
+        'name' => 'Иванов',
+        'specialty' => 'херург'
+    ),
     array (
             'name' => 'Петров',
             'specialty' => 'кардиолог'
