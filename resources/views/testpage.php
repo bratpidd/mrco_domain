@@ -13,5 +13,5 @@ echo("$var");
 print($var);
 ?>
 <script>setTimeout(function () {
-    alert('done');
+    alert("done");
 }, 3000);</script>
