@@ -176,7 +176,8 @@ class HomeController extends Controller
 
     }
 
-    public function testpage() {
-        return view('testpage');
+    public function testpage()
+    {
+        return view('vue_test');
     }
 }
