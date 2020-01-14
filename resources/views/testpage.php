@@ -6,7 +6,7 @@ echo x;
 
 
 
-$var = "kukareku"
+$var = "kukareku";
 echo '$var';
 echo $var;
 echo("$var");
