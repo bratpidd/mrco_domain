@@ -2,6 +2,7 @@
 
 ## Простейший блог
 Создан с использованием Laravel, Vue, MySQL
+
 http://lara.chukovskiy.beget.tech/ 
 
 Реализовано:
